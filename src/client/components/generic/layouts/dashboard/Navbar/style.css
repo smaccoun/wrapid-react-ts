@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border: 1px solid black;
+  background: #FFFFFF;
+  box-shadow: 0 4px 8px 0 #D2D6DF;
+}
+
+.brandLabel {
+  margin-left: 16px;
+}
+
+.rightActionItems {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+/* Rectangle: */

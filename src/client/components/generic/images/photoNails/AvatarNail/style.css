@@ -1,0 +1,20 @@
+.container {
+  margin-left: 16px;
+  margin-right: 16px;
+
+  width: 32px;
+  height: 32px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  border: 1px solid black;
+  border-radius: 50%;
+
+  /* Mask: */
+  background: #D8D8D8;
+  /* terrarium-01-shot: */
+  background: #FF4600;
+  /* JWhyjHz: */
+  /* Rectangle 5: */
+  background: rgba(255,70,0,0.10);
+}

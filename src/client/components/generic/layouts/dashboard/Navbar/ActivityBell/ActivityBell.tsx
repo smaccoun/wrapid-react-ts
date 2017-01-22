@@ -8,7 +8,10 @@ class ActivityBell extends React.Component<{}, {}>{
   public render() {
     return(
       <div className={s.container}>
-        3
+        <div className={s.bellQtContainer}>
+          <div className={s.activeQt}>3</div>
+          <i className="fa fa-bell" />
+        </div>
       </div>
     )
   }

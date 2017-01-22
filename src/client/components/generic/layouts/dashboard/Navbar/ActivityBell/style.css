@@ -2,3 +2,19 @@
   margin-top: 16px;
   margin-bottom: 16px;
 }
+
+.bellQtContainer {
+  position: relative
+}
+
+.activeQt {
+    position: absolute;
+    top: -8px;
+    right: -6px;
+    background-color: red;
+    color: white;
+    font-size: 0.8em;
+    padding: 0px 3px 0px 3px;
+    border-radius: 5px;
+    border: 1px solid red;
+}

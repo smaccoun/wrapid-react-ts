@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import Dashboard from '../../generic/layouts/dashboard/Dashboard/Dashboard'
-import ProfileWizard from '../profile/ProfileWizard/ProfileWizard'
 import {ExtraPortalModel} from '../../../models/extraPortal/ExtraPortalModel'
 const extraPortalModel = new ExtraPortalModel();
 

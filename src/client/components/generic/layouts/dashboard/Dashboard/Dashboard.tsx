@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+const s = require('./style.css')
+
 import Navbar from '../Navbar/Navbar'
 import MainPage from '../MainPage/MainPage'
 
@@ -8,9 +10,11 @@ class Dashboard extends React.Component<{}, {}>{
 
   public render(){
     return(
-      <div>
+      <div className={s.container}>
         <Navbar />
-        {this.props.children}
+        <div className={s.mainPage}>
+          {this.props.children}
+        </div>
       </div>
     )
   }

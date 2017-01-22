@@ -2,7 +2,6 @@ import {observable, computed, action, autorun} from 'mobx'
 
 import viewProfileWizard from '../../components/extras/profile/ProfileWizard/ProfileWizard'
 
-
 export class ExtraPortalModel {
 
   @observable profile: any = null;

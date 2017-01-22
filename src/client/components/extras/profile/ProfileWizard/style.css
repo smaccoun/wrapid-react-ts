@@ -1,0 +1,16 @@
+.heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 28px 0px 36px 0px;
+}
+
+.heading_text {
+  /* Please Enter Info: */
+
+  justify-content: center;
+  font-family: Roboto-Bold;
+  font-size: 32px;
+  color: #282C35;
+  letter-spacing: 0;
+}

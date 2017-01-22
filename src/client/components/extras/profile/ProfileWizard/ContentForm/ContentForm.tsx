@@ -23,16 +23,18 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-const injectTapEventPlugin = require('react-tap-event-plugin');
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 
 class ContentForm extends React.Component<{}, {}> {
   public render(){
     return(
-      <MuiThemeProvider>
-        <RaisedButton label="Default" />
-      </MuiThemeProvider>
+      <div>
+        <TextField />
+        <TextField />
+        <TextField />
+        <RaisedButton label="Next" />
+      </div>
     )
   }
 }

@@ -10,7 +10,7 @@ class Dashboard extends React.Component<{}, {}>{
     return(
       <div>
         <Navbar />
-        <MainPage />
+        {this.props.children}
       </div>
     )
   }

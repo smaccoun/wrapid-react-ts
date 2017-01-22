@@ -11,7 +11,7 @@ class ExtraPortal extends React.Component<{}, {}>{
     return(
       <Dashboard>
         <h1>Welcome extra! </h1>
-        <ProfileWizard  />
+        <ProfileWizard />
       </Dashboard>
     )
   }

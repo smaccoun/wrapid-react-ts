@@ -13,12 +13,14 @@ const ProfileWizardContent = (props: Props) => {
     return(
       <div>
         {Object.keys(props.fields).map((fieldKey, key) => {
+          console.log(fieldKey)
           const field=props.fields[fieldKey]
           return(
-            <div key={key}>
-              <TextField id={field.label}>
-              </TextField>
-            </div>
+              <TextField
+                key={field.label}
+                id={field.label}
+                floatingLabelText={field.label}
+              />
           )
         })}
       </div>

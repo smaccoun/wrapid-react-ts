@@ -19,11 +19,12 @@ const ProfileWizard = observer((props: Props) => {
   const model = props.model
   const currentStep = model.currentStep;
   console.log(currentStep)
+  const advButtonMsg = model.isLastStep ? 'Finish' : 'Next'
   return(
     <div>
       <h1>{currentStep.title}</h1>
       <ProfileWizardContent fields={currentStep.fields}/>
-      <RaisedButton label="Next" onClick={model.incrementStep}/>
+      <RaisedButton label={advButtonMsg} onClick={model.incrementStep}/>
     </div>
   )
 })

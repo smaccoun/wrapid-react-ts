@@ -9,9 +9,9 @@
     "@types/react" "*"
     "@types/react-addons-linked-state-mixin" "*"
 
-"@types/node@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-0.0.2.tgz#0da4934902fbf68a97a0f53204a35ad2224917bc"
+"@types/node@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.1.tgz#858610f58e4d48dd4410145eef9e12c97e3aacfd"
 
 "@types/react-addons-linked-state-mixin@*":
   version "0.14.16"

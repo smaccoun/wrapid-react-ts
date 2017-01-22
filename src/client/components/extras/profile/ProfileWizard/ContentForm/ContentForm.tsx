@@ -30,9 +30,7 @@ class ContentForm extends React.Component<{}, {}> {
   public render(){
     return(
       <div>
-        <TextField />
-        <TextField />
-        <TextField />
+        <TextField id="username" />
         <RaisedButton label="Next" />
       </div>
     )

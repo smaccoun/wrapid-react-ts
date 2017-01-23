@@ -29,6 +29,35 @@ const emailField: Field = {
   rules: 'required|email|string|between:5,20',
   bindings: 'MaterialTextField',
 }
+
+const firstNameField: Field = {
+  label: 'First Name',
+  value: 'SteveJobs',
+  placeholder: 'Insert First Name',
+  rules: 'checkUser|required|string|between:5,15',
+  bindings: 'MaterialTextField',
+  // validate: [checkUser],
+}
+
+const lastNameField: Field = {
+  label: 'Last Name',
+  value: 'SteveJobs',
+  placeholder: 'Insert Last Name',
+  rules: 'checkUser|required|string|between:5,15',
+  bindings: 'MaterialTextField',
+  // validate: [checkUser],
+}
+
+const middleInitialField: Field = {
+  label: 'Middle Initial',
+  value: 'SteveJobs',
+  placeholder: 'Insert Middle Initial',
+  rules: 'checkUser|required|string|between:5,15',
+  bindings: 'MaterialTextField',
+  // validate: [checkUser],
+}
+
+
 const passwordField: Field = {
   label: 'Password',
   value: 'thinkdifferent',
@@ -59,6 +88,9 @@ export const fields = {
   userNameField,
   emailField,
   passwordField,
+  firstNameField,
+  lastNameField,
+  middleInitialField,
   emailConfirm,
   signature
 }

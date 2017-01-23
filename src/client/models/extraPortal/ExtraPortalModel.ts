@@ -1,4 +1,6 @@
 import {observable, computed, action, autorun} from 'mobx'
+import gqlSDK from '../../../server/connect/graphcoolConnect'
+import {gqlGetExtra} from '../../../server/api/queries/queries'
 
 import viewProfileWizard from '../../components/extras/profile/ProfileWizard/ProfileWizard'
 import {ProfileWizardModel} from './profileWizard/ProfileWizardModel'
@@ -31,5 +33,6 @@ export class ExtraPortalModel {
   }
 
   constructor() {
+
   }
 }

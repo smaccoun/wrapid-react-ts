@@ -27,8 +27,10 @@ class Navbar extends React.Component<{}, {}>{
 
 const HamburgerMenu = () => {
   return(
-    <div className={s.HamburgerMenu}>
-      --
+    <div className={s.hamburgerMenu}>
+      <span className={s.iconBar}></span>
+      <span className={s.iconBar}></span>
+      <span className={s.iconBar}></span>
     </div>
   )
 }

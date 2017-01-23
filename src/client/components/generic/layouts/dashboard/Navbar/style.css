@@ -21,4 +21,17 @@
   margin-right: 16px;
 }
 
+.hamburgerMenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.hamburgerMenu .iconBar {
+  margin: 1px 0px 2px 0px;
+  background-color: black;
+  border-radius: 1px;
+  width: 18px;
+  height: 3px;
+}
+
 /* Rectangle: */

@@ -16,7 +16,10 @@ class Navbar extends React.Component {
     }
 }
 const HamburgerMenu = () => {
-    return (React.createElement("div", { className: s.HamburgerMenu }, "--"));
+    return (React.createElement("div", { className: s.hamburgerMenu },
+        React.createElement("span", { className: s.iconBar }),
+        React.createElement("span", { className: s.iconBar }),
+        React.createElement("span", { className: s.iconBar })));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = Navbar;

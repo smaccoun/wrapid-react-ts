@@ -36,7 +36,7 @@
     "validatorjs": "^3.11.0"
   },
   "devDependencies": {
-    "@types/node": "^7.0.1",
+    "@types/node": "^7.0.2",
     "@types/react-hot-loader": "^3.0.0",
     "awesome-typescript-loader": "^3.0.0-beta.17",
     "babel-core": "^6.22.1",

@@ -33,9 +33,9 @@
   version "6.0.61"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.61.tgz#eea1748ad99decaf319b571017018631974ac6f0"
 
-"@types/node@^7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.1.tgz#858610f58e4d48dd4410145eef9e12c97e3aacfd"
+"@types/node@^7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.2.tgz#f318fcda63543ac076316cb91653d8e89aa7bfce"
 
 "@types/promises-a-plus@0.0.26":
   version "0.0.26"

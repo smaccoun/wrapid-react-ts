@@ -46,9 +46,19 @@ const emailConfirm: Field = {
   bindings: 'MaterialTextField',
 }
 
+const signature: Field = {
+  label: 'Signature',
+  value: 's.jobs@apple.com',
+  placeholder: 'Type Digital Signature',
+  // validate: [isEmail, shouldBeEqualTo('email')],
+  rules: 'required|string|between:5,20',
+  bindings: 'MaterialTextField',
+}
+
 export const fields = {
   userNameField,
   emailField,
   passwordField,
-  emailConfirm
+  emailConfirm,
+  signature
 }

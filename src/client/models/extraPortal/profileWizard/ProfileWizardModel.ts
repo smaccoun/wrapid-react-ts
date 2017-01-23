@@ -1,6 +1,6 @@
 import {observable, computed, action, autorun} from 'mobx'
 
-import {fields, plugins} from '../fields/fields'
+import {fields, plugins} from '../profileFields/fields'
 
 export class ProfileWizardStep {
   title: string
@@ -17,8 +17,9 @@ export class ProfileWizardStep {
 
 const nameFields = {userName: fields.userNameField, password: fields.passwordField}
 const emailFields = {email: fields.emailField}
-const firstStep = new ProfileWizardStep('Names', nameFields)
-const secondStep = new ProfileWizardStep('Email', emailFields)
+const signatureField = {signature: fields.signature}
+const firstStep = new ProfileWizardStep('Personal Info', nameFields)
+const secondStep = new ProfileWizardStep('Signature', signatureField)
 const wizardSteps: Array<ProfileWizardStep> = [firstStep, secondStep]
 
 export class ProfileWizardModel {

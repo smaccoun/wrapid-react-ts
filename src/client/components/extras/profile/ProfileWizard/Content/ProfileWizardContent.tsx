@@ -5,8 +5,6 @@ const s = require('./style.css')
 
 import TextField from 'material-ui/TextField';
 
-import {Field} from '../../fields/fields'
-
 interface Props {
   fields: any
 }

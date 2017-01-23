@@ -6,7 +6,6 @@ const s = require('./style.css')
 import {observer} from 'mobx-react'
 
 import WizardContainer from './WizardContainer/WizardContainer'
-import {ProfileWizardModel} from './ProfileWizardModel'
 
 
 interface Props {
@@ -29,8 +28,7 @@ const ProfileWizard = observer((props: Props) => {
   )
 })
 
-const viewProfileWizard = () => {
-  const model = new ProfileWizardModel();
+const viewProfileWizard = (model : any) => {
   return class PP extends React.Component<{}, {}> {
     render(){
       return(

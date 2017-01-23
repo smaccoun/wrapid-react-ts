@@ -21,7 +21,7 @@
     "@types/react-dom": "^0.14.19",
     "@types/react-tap-event-plugin": "^0.0.30",
     "@types/validatorjs": "^3.7.0",
-    "apollo-client": "^0.6.0",
+    "apollo-client": "^0.8.0",
     "graphql-tag": "^1.2.3",
     "material-ui": "^0.16.7",
     "mobx": "^3.0.2",

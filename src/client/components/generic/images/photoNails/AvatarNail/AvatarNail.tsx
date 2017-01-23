@@ -1,12 +1,14 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+const avatarImg: string = require('../../../../../assets/images/theraccounATgmailDOTcom.jpg')
+
 const s = require('./style.css')
 
 const AvatarNail = () => {
+  console.log(avatarImg);
   return(
-    <div className={s.container}>
-    </div>
+    <img src={`${avatarImg}`} className={s.container}/>
   )
 }
 

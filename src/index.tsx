@@ -3,14 +3,11 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import App from './app';
 import gqlSDK from './server/connect/graphcoolConnect'
-import { ApolloProvider } from 'react-apollo'
 
 render(
-  <ApolloProvider client={gqlSDK}>
     <AppContainer>
       <App />
-    </AppContainer>
-  </ApolloProvider>,
+    </AppContainer>,
 document.querySelector("#app"));
 
 var module: any = module

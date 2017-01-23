@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import Dashboard from '../../generic/layouts/dashboard/Dashboard/Dashboard'
@@ -22,13 +21,4 @@ class ExtraPortal extends React.Component<{}, {}>{
   }
 }
 
-const FeedQuery = gql`query profs {
-  allExtraProfiles {
-    id
-    baseProfile {
-      firstName
-    }
-  }
-}`
-
-export default graphql(FeedQuery)(ExtraPortal)
+export default ExtraPortal

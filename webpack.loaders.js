@@ -2,7 +2,7 @@ module.exports = [
 	{
 		test: /\.tsx?$/,
 		exclude: /(node_modules|bower_components|public)/,
-		loader: 'awesome-typescript-loader'
+		loader: 'ts-loader'
 	},
 	{
 		test: /\.jsx?$/,

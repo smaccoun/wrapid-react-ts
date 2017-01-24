@@ -28,6 +28,7 @@ export class ProfileWizardModel {
 
   @observable profile: ExtraProfile = null;
   @observable currentStepIdx: number = 0;
+  onSubmitProfile: () => void;
 
   @computed get currentStep(): ProfileWizardStep {
     console.log(this.currentStepIdx)
@@ -38,16 +39,15 @@ export class ProfileWizardModel {
   }
 
   @computed get isLastStep(): boolean {
+    console.log(this.currentStepIdx)
     return this.currentStepIdx == this.wizardSteps.length - 1
   }
 
-  submitProfile = () => {
-
-  }
-
   @action incrementStep = (): void => {
-    if(!this.isLastStep){
-
+    console.log(this.isLastStep)
+    if(this.isLastStep){
+      this.onSubmitProfile();
+      return;
     }
 
     this.currentStepIdx = this.currentStepIdx + 1;
@@ -62,7 +62,7 @@ export class ProfileWizardModel {
     return wizardSteps
   }
 
-  constructor() {
-
+  constructor(onSubmitProfile?: () => void) {
+    this.onSubmitProfile = onSubmitProfile;
   }
 }

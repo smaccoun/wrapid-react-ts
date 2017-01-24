@@ -1,6 +1,8 @@
 import {observable} from 'mobx'
 import ILoginModel from '../components/generic/login/Login'
 
+import Router from '../../router/router'
+
 export interface AppModel {
   loginModel: ILoginModel | null,
   dashboardModel: null

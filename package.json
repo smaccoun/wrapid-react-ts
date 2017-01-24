@@ -31,6 +31,7 @@
     "react-dom": "^15.4.2",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
+    "router5": "^4.4.1",
     "sass-loader": "^4.1.1",
     "validatorjs": "^3.11.0"
   },

@@ -9,11 +9,6 @@ interface Props {
   fields: any
 }
 
-const onInput = (e: any, fieldLabel: string): void => {
-  console.log(e.target.value);
-  console.log(fieldLabel);
-}
-
 const ProfileWizardContent = (props: Props) => {
     return(
       <div className={s.container}>
@@ -25,7 +20,6 @@ const ProfileWizardContent = (props: Props) => {
                 key={field.label}
                 id={field.label}
                 floatingLabelText={field.label}
-                onChange={(e: any) => onInput(e, field.label)}
               />
           )
         })}

@@ -25,9 +25,9 @@
     "@types/react" "*"
     "@types/react-addons-linked-state-mixin" "*"
 
-"@types/node@^7.0.2":
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.2.tgz#f318fcda63543ac076316cb91653d8e89aa7bfce"
+"@types/node@^7.0.4":
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.4.tgz#9aabc135979ded383325749f508894c662948c8b"
 
 "@types/react-addons-linked-state-mixin@*":
   version "0.14.16"
@@ -41,9 +41,9 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-hot-loader@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@types/react-hot-loader/-/react-hot-loader-3.0.0.tgz#8adaa7fba98f369377653c02a7fec26515440016"
+"@types/react-hot-loader@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-hot-loader/-/react-hot-loader-3.0.1.tgz#d15e3af68595c5d6c5576cfcc18e28d578924fce"
   dependencies:
     "@types/react" "*"
 

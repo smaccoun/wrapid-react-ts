@@ -16,9 +16,9 @@
   "homepage": "https://github.com/pinqy520/simple-tsx-starter-kit#readme",
   "dependencies": {
     "@types/chai": "^3.4.34",
-    "@types/material-ui": "^0.16.47",
-    "@types/react": "^0.14.55",
-    "@types/react-dom": "^0.14.19",
+    "@types/material-ui": "^0.16.48",
+    "@types/react": "^15.0.2",
+    "@types/react-dom": "^0.14.21",
     "@types/react-tap-event-plugin": "^0.0.30",
     "@types/validatorjs": "^3.7.0",
     "apollo-client": "^0.8.0",
@@ -39,7 +39,6 @@
   "devDependencies": {
     "@types/node": "^7.0.4",
     "@types/react-hot-loader": "^3.0.1",
-    "awesome-typescript-loader": "^3.0.0-beta.17",
     "babel-core": "^6.22.1",
     "babel-loader": "6.2.10",
     "babel-plugin-transform-class-properties": "^6.19.0",

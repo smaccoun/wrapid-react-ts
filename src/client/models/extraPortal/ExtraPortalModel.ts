@@ -2,11 +2,12 @@ import {observable, computed, action, autorun, toJS, isObservable} from 'mobx'
 import gqlSDK from '../../../server/connect/graphcoolConnect'
 import {gqlGetExtra} from '../../../server/api/queries/queries'
 import Router from '../../../router/router'
+import {isEmpty} from 'ramda'
 
 import viewProfileWizard from '../../components/extras/profile/ProfileWizard/ProfileWizard'
 import {ProfileWizardModel} from './profileWizard/ProfileWizardModel'
 
-import AllFormStatus from '../../components/extras/forms/AllFormStatus/AllFormStatus'
+import viewAllFormStatus from '../../components/extras/forms/AllFormStatus/AllFormStatus'
 
 const childModels = {
   profileWizard: (onSubmitProfile?: () => void) => new ProfileWizardModel(onSubmitProfile)
@@ -14,30 +15,28 @@ const childModels = {
 
 type ExtraProfile = any;
 
+
+
 export class ExtraPortalModel {
 
   constructor() {
     console.log(Router);
     Router.addListener(this.routeListener)
+    console.log(this.profile)
 
-    // const profileStore = observable({
-    //   profile: observable.ref(null),
-    //   hasCompleted: computed(function() {
-    //     return !!this.profile;
-    //   }),
-    //   setProfile: action.bound(function() {
-    //     this.profile = {firstName: 'steve'}
-    //   })
-    // })
+    // this.profile = observable({
+    //   data: {},
+    //   get isCompleted() {
+    //     console.log(this.data);
+    //     return !isEmpty(this.data)
+    //   }
+    // });
+    //
+    // console.log(this.profile);
   }
 
-  @observable.ref profile: ExtraProfile;
-  @observable.ref wizardResults: any;
-
-  @computed get hasCompletedProfile(): boolean{
-    console.log(!!this.profile)
-    return !!this.profile;
-  }
+  @observable profile: ExtraProfile;
+  @observable wizardResults: any;
 
   @action setProfile = (profile: ExtraProfile): void => {
     this.profile = profile;
@@ -47,8 +46,13 @@ export class ExtraPortalModel {
 
   @action onSubmitProfile = () => {
     this.wizardResults = {firstName: 'Steve'}
-    this.setProfile(this.wizardResults)
+    console.log(this);
+    this.profile = {firstName: 'Steve'}
     console.log(this.profile);
+  }
+
+  @computed get hasCompletedProfile() {
+    return !!this.profile
   }
 
   @computed get hasCompletedWizard() {
@@ -57,8 +61,6 @@ export class ExtraPortalModel {
   }
 
   @computed get mainViewName(): string {
-    console.log(this.hasCompletedProfile)
-    console.log(this.hasCompletedWizard)
     if(!this.hasCompletedProfile) {
       return 'ProfileWizard'
     }
@@ -77,7 +79,11 @@ export class ExtraPortalModel {
         const model = childModels.profileWizard(this.onSubmitProfile)
         return viewProfileWizard(model);
       case 'AllFormStatus':
-        return AllFormStatus
+        const view = viewAllFormStatus({})
+        console.log(view);
+        return view;
+      default:
+        return viewAllFormStatus({})
     }
   }
 

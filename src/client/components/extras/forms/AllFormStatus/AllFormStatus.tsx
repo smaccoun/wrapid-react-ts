@@ -21,4 +21,4 @@ const viewAllFormStatus = (model : any) => {
   }
 }
 
-export default AllFormStatus;
+export default viewAllFormStatus;

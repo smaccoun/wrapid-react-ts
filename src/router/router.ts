@@ -12,4 +12,6 @@ const Router =
         .usePlugin(browserPlugin({useHash: true}));
 console.log(Router);
 
+Router.start();
+
 export default Router;

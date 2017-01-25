@@ -3,8 +3,6 @@ const React = require("react");
 const react_dom_1 = require("react-dom");
 const react_hot_loader_1 = require("react-hot-loader");
 const app_1 = require("./app");
-const router_1 = require("./router/router");
-router_1.default.start();
 react_dom_1.render(React.createElement(react_hot_loader_1.AppContainer, null,
     React.createElement(app_1.default, null)), document.querySelector("#app"));
 var module = module;

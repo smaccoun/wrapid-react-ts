@@ -23,8 +23,8 @@ export class ExtraPortalModel {
 
   constructor() {
     console.log(Router);
+    this.addRouterNodeListeners();
     this.autoViewSet();
-    Router.addListener(this.routeListener)
     console.log(this.profile)
 
     // this.profile = observable({
@@ -67,31 +67,40 @@ export class ExtraPortalModel {
   autoViewSet = (): void => {
     autorun(() => {
       if(!this.hasCompletedProfile) {
-        this.userSetView('ExtraPortal.ProfileWizard', true)
+        console.log('Going to profile wizard')
+        this.setView('ExtraPortal.ProfileWizard', true)
+        return;
       }
-      else if(this.hasCompletedWizard){
-        this.userSetView('ExtraPortal.AllFormStatus', true)
-      }
-      else{
-        this.userSetView('ExtraPortal.DailyTasks', true)
+
+      if(this.hasCompletedWizard){
+        this.setView('ExtraPortal.AllFormStatus', true)
+        return;
       }
     })
   }
 
-  routeListener = (fromState: any, toState: any): void => {
-    console.log(fromState);
-    console.log(toState);
-    // if(this.mainViewName != toState.name){
-    //   console.log('Auto setting!')
-    //   this.mainViewName = toState.name;
-    // }
+  addRouterNodeListeners = (): void => {
+    Router.addRouteListener('ExtraPortal.DailyTasks', (toState: any, fromState: any) => {
+      this.mainViewName = 'ExtraPortal.DailyTasks';
+    });
+
+    Router.addRouteListener('ExtraPortal.AllFormStatus', (toState: any, fromState: any) => {
+      this.mainViewName = 'ExtraPortal.AllFormStatus';
+    })
+
+    Router.addRouteListener('ExtraPortal.ProfileWizard', (toState: any, fromState: any) => {
+      this.mainViewName = 'ExtraPortal.ProfileWizard';
+    })
+
   }
 
-  @action
-  userSetView = (viewName: string, withHistory?: boolean): void => {
-    this.mainViewName = viewName;
+  setView = (viewName: string, withHistory?: boolean): void => {
     if(withHistory){
-      Router.navigate(viewName, {reload: true});
+      console.log(viewName)
+      Router.navigate(viewName, {}, {reload: true}, (err, state) => {
+        console.log(state);
+        console.error(err)
+      });
     }
 
   }
@@ -103,7 +112,7 @@ export class ExtraPortalModel {
         const model = childModels.profileWizard(this.onSubmitProfile)
         return viewProfileWizard(model);
       case 'ExtraPortal.AllFormStatus':
-        const navDailyTasks = () => this.userSetView('ExtraPortal.DailyTasks', true)
+        const navDailyTasks = () => this.setView('ExtraPortal.DailyTasks', true)
         const view = viewAllFormStatus({navDailyTasks})
         console.log(view);
         return view;

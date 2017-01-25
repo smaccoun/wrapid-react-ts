@@ -11,8 +11,6 @@ const extraPortalModel = new ExtraPortalModel();
 class ExtraPortal extends React.Component<{}, {}>{
 
   public render() {
-    const form = {meow: 'meow'}
-    console.log(extraPortalModel)
     const MainView = extraPortalModel.mainView;
     return(
       <Dashboard>

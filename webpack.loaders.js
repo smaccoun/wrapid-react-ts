@@ -35,9 +35,9 @@ module.exports = [
 		loader: "url-loader?limit=10000&mimetype=image/gif"
 	},
 	{
-		test: /\.jpg/,
+		test: /\.jpe?g/,
 		exclude: /(node_modules|bower_components)/,
-		loader: "url-loader?limit=10000&mimetype=image/jpg"
+		loader: "url-loader"
 	},
 	{
 		test: /\.png/,

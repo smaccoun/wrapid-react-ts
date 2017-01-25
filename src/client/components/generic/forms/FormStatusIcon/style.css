@@ -1,0 +1,31 @@
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  box-shadow: 0 8px 8px 0 rgba(210,214,223,0.70);
+  margin: 8px 16px 8px 16px;
+}
+
+.iconImg {
+  width: 180px;
+  height: 100%;
+}
+
+.infoContainer {
+  display: inline-flex;
+  flex-direction: column;
+  margin-left: 8px;
+  border: 1px solid black;
+}
+
+.formName {
+  font-style: Roboto;
+  height: 12px;
+  font-weight: 300;
+}
+
+.completedTime {
+  font-style: Robot;
+  height: 8px;
+  margin: 2px 0px 2px 0px;
+}

@@ -20,7 +20,7 @@ const AllFormStatus = (props: any) => {
   return(
     <div className={s.container}>
       <h1>Your completed forms</h1>
-      <div>Go to daily tasks - </div>
+      <div onClick={props.model.navDailyTasks}>Go to daily tasks - </div>
       {forms.map((form, key) => {
         return(
           <FormStatusIcon key={key} formName={form.formName} imgSrc={form.imgSrc} />

@@ -6,11 +6,7 @@ import gqlSDK from './server/connect/graphcoolConnect'
 
 import Router from './router/router'
 
-Router.start('/Login');
-Router.navigate('Login');
-console.log(Router);
-
-console.log(Router);
+Router.start();
 
 render(
     <AppContainer>

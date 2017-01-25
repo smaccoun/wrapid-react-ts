@@ -5,7 +5,7 @@ import browserPlugin from 'router5/plugins/browser';
 console.log(listenersPlugin)
 console.log(listenersPlugin())
 
-const options = {defaultRoute: 'login'}
+const options = {defaultRoute: 'ExtraPortal'}
 const Router =
       createRouter(routes, options)
         .usePlugin(listenersPlugin())

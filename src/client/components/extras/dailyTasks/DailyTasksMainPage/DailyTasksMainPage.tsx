@@ -4,6 +4,13 @@ import * as ReactDOM from 'react-dom';
 const s = require('./style.css')
 
 import MainSchedule from '../../schedule/MainSchedule/MainSchedule'
+import CrewInfoPanel from '../../dailyTasks/CrewInfoPanel/CrewInfoPanel'
+
+const sampleCrewInfoItems = [
+  {role: 'Lead PA', name: 'Josh Weinberg'},
+  {role: 'Extra PA', name: 'Rany Lahey'},
+  {role: 'Wardrobe Manager', name: 'Pam Poovey'}
+]
 
 
 interface Props {
@@ -19,6 +26,7 @@ const DailyTasksMainPage = (props: Props) => {
         <span className={s.production}>AMC's The Walking Dead</span>
       </div>
       <MainSchedule />
+      <CrewInfoPanel crewInfoItems={sampleCrewInfoItems}/>
     </div>
   )
 }

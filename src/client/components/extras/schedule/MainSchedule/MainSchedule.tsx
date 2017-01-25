@@ -5,13 +5,12 @@ const s = require('./style.css')
 
 import DefaultPanel from '../../dailyTasks/panels/DefaultPanel/DefaultPanel'
 
+
 const MainSchedule = () => {
   return(
-    <div className={s.container}>
-      <DefaultPanel headerItems={['Schedule', 'Monday']}>
-        <div>Main content!</div>
-      </DefaultPanel>
-    </div>
+    <DefaultPanel headerItems={['Schedule', 'Monday']}>
+      <div>Schedule Item!</div>
+    </DefaultPanel>
   )
 }
 

@@ -5,7 +5,12 @@ const s = require('./style.css')
 
 const MainSchedule = () => {
   return(
-    <div>Main Schedule!</div>
+    <div className={s.container}>
+      <div className={s.headerInfo}>
+        <span>Schedule</span>
+        <span>Monday May 25, 2017</span>
+      </div>
+    </div>
   )
 }
 

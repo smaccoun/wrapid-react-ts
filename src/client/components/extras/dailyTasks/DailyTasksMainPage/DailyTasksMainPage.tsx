@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 
 const s = require('./style.css')
 
+import ExtraNotifications from '../notifications/ExtraNotifications/ExtraNotifications'
 import MainSchedule from '../../schedule/MainSchedule/MainSchedule'
 import CrewInfoPanel from '../../dailyTasks/CrewInfoPanel/CrewInfoPanel'
 
@@ -25,6 +26,7 @@ const DailyTasksMainPage = (props: Props) => {
         <span className={s.title}>Welcome, Steve</span>
         <span className={s.production}>AMC's The Walking Dead</span>
       </div>
+      <ExtraNotifications notifications={['Lunch!', 'Meeting!']}/>
       <MainSchedule />
       <CrewInfoPanel crewInfoItems={sampleCrewInfoItems}/>
     </div>

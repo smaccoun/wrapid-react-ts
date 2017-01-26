@@ -1,3 +1,31 @@
+.itemContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 8px 4px 8px;
+}
+
+.itemContainer > .title {
+  font-family: Roboto-Regular;
+  font-size: 12px;
+  color: #363A43;
+  letter-spacing: 0;
+}
+
+.itemContainer > .startTm {
+  font-family: RobotoMono-Regular;
+  font-size: 14px;
+  color: #9B9EA7;
+  letter-spacing: 0;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  align-items: center;
+  margin: 16px 0px 0px 0px;
+}
 
 
 
@@ -5,6 +33,12 @@
   background: #50E3C2;
   box-shadow: 0 2px 2px 0 #C3C6CF;
   border-radius: 2px;
+  height: 48px;
+  width: 114px;
+}
+
+.checkinButton > span {
+  margin: 12px 8px 12px 8px;
   font-family: Roboto-Medium;
   font-size: 16px;
   color: #FFFFFF;

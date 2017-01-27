@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import DefaultPanel from "../../../dailyTasks/panels/DefaultPanel/DefaultPanel";
 
 const s = require('./style.css')
 

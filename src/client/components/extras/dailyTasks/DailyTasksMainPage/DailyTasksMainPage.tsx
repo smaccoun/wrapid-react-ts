@@ -19,7 +19,8 @@ interface Props {
 }
 
 const sampleNotificationItems = [
-    {title: 'Lunch!', timeSpan: {startTm: '8:00', endTm: '10:00 AM'}}
+    {title: 'Lunch', timeSpan: {startTm: '8:00', endTm: '10:00 AM'}},
+    {title: 'Do stuff', timeSpan: {startTm: '11:00', endTm: '1:00 PM'}}
 ]
 
 const DailyTasksMainPage = (props: Props) => {

@@ -18,6 +18,10 @@ interface Props {
   model: any;
 }
 
+const sampleNotificationItems = [
+    {title: 'Lunch!', timeSpan: {startTm: '8:00', endTm: '10:00 AM'}}
+]
+
 const DailyTasksMainPage = (props: Props) => {
   return(
     <div className={s.container}>
@@ -26,7 +30,7 @@ const DailyTasksMainPage = (props: Props) => {
         <span className={s.title}>Welcome, Steve</span>
         <span className={s.production}>AMC's The Walking Dead</span>
       </div>
-      <ExtraNotifications notifications={['Lunch!', 'Meeting!']}/>
+      <ExtraNotifications notifications={sampleNotificationItems}/>
       <MainSchedule />
       <CrewInfoPanel crewInfoItems={sampleCrewInfoItems}/>
     </div>

@@ -10,22 +10,15 @@ interface Props {
 const HorizontalSlide = (props: Props) => {
     return(
         <div>
-            {props.slideItems.map((slideItem, key) => {
+            {props.slideItems.map((SlideItem, key) => {
                 return(
-                    <HorizontalSlideItem />
+                    <div>
+                        {SlideItem}
+                    </div>
                 )
             })}
         </div>
     )
 }
 
-const HorizontalSlideItem = () => {
-    return(
-        <div>
-            Slide item!
-        </div>
-    )
-
-}
-
-export {HorizontalSlide, HorizontalSlideItem};
+export {HorizontalSlide};

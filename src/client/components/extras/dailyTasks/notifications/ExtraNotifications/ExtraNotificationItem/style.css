@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 #D2D6DF;
+    height: 78px;
+    width: 259px;
+}
+
+.iconContainer {
+    width: 64px;
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+}
+
+.title {
+    font-family: Roboto-Regular;
+    font-size: 16px;
+    color: #363A43;
+    letter-spacing: 0;
+}
+
+.timeSpan {
+    margin-top: 8px;
+    font-family: RobotoMono-Regular;
+    font-size: 14px;
+    color: #6D717A;
+    letter-spacing: 0;
+}

@@ -1,17 +1,18 @@
 import * as React from 'react'
 
 import DefaultPanel from '../../panels/DefaultPanel/DefaultPanel'
-import {HorizontalSlide, HorizontalSlideItem} from '../../../../generic/notifications/HorizontalSlide/HorizontalSlide'
+import {HorizontalSlide} from '../../../../generic/notifications/HorizontalSlide/HorizontalSlide'
+import {ExtraNotificationItem, Props as ENProps} from '../ExtraNotifications/ExtraNotificationItem/ExtraNotificationItem'
 
 interface Props {
- notifications: Array<any>
+ notifications: Array<ENProps>
 }
 
 const ExtraNotifications = (props: Props) => {
 
     const slideNotifications = props.notifications.map(n => {
         return(
-            <HorizontalSlideItem />
+            <ExtraNotificationItem title={n.title} timeSpan={n.timeSpan}/>
         )
     })
 

@@ -1,8 +1,14 @@
 import * as React from 'react'
 
-const CheckIcon = () => {
+interface Props {
+    width?: string
+    height?: string
+}
+const CheckIcon = (props: Props) => {
+    const width = props.width || '24px'
+    const height = props.height || '24px'
     return(
-        <svg height="24px" width="24px" version="1.1" viewBox="16 16 24 24">
+        <svg height={height} width={width} version="1.1" viewBox="16 16 24 24">
             <defs/>
             <g id="ic_check_circle_black_24px" fill="none" stroke="none" strokeWidth="1" transform="translate(16.000000, 16.000000)">
                 <polygon id="Shape" points="0 0 24 0 24 24 0 24"/>

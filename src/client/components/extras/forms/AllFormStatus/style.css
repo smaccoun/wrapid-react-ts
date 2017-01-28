@@ -1,2 +1,27 @@
 .container {
 }
+
+.formIconList {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.formIcon {
+    margin: 4px 0px 4px 0px;
+}
+
+.headerTitle {
+    font-family: Roboto-Bold;
+    font-size: 32px;
+    color: #282C35;
+    letter-spacing: 0;
+}
+
+.dailyTaskNav {
+    font-family: Roboto;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 20px;
+    margin: 8px 0px 4px 0px;
+}

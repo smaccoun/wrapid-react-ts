@@ -6,6 +6,8 @@ const s = require('./style.css')
 import ExtraNotifications from '../notifications/ExtraNotifications/ExtraNotifications'
 import MainSchedule from '../../schedule/MainSchedule/MainSchedule'
 import CrewInfoPanel from '../../dailyTasks/CrewInfoPanel/CrewInfoPanel'
+import LunchNotificationIcon from "../../../generic/icons/LunchNotificationIcon";
+
 
 const sampleCrewInfoItems = [
   {role: 'Lead PA', name: 'Josh Weinberg'},
@@ -19,7 +21,7 @@ interface Props {
 }
 
 const sampleNotificationItems = [
-    {title: 'Lunch', timeSpan: {startTm: '8:00', endTm: '10:00 AM'}},
+    {title: 'Lunch', timeSpan: {startTm: '8:00', endTm: '10:00 AM'}, icon: <LunchNotificationIcon />},
     {title: 'Do stuff', timeSpan: {startTm: '11:00', endTm: '1:00 PM'}}
 ]
 

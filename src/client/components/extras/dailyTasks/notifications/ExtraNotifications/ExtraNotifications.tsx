@@ -20,9 +20,10 @@ const ExtraNotifications = (props: Props) => {
 
     const checkIcon = <CheckIcon />
     const slideNotifications = props.notifications.map((n, key) => {
+        const icon = n.icon || checkIcon
         return(
             <div key={key} style={{width: '259px', height: '78px'}}>
-                <ExtraNotificationItem title={n.title} timeSpan={n.timeSpan} icon={checkIcon}/>
+                <ExtraNotificationItem title={n.title} timeSpan={n.timeSpan} icon={icon}/>
             </div>
         )
     })

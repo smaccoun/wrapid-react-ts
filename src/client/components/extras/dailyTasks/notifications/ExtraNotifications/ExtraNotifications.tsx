@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import DefaultPanel from '../../panels/DefaultPanel/DefaultPanel'
 import {ExtraNotificationItem, Props as ENProps} from '../ExtraNotifications/ExtraNotificationItem/ExtraNotificationItem'
+import CheckIcon from "../../../../generic/icons/CheckIcon";
 
 interface Props {
  notifications: Array<ENProps>
@@ -17,10 +18,11 @@ var settings = {
 
 const ExtraNotifications = (props: Props) => {
 
+    const checkIcon = <CheckIcon />
     const slideNotifications = props.notifications.map((n, key) => {
         return(
             <div key={key} style={{width: '259px', height: '78px'}}>
-                <ExtraNotificationItem title={n.title} timeSpan={n.timeSpan}/>
+                <ExtraNotificationItem title={n.title} timeSpan={n.timeSpan} icon={checkIcon}/>
             </div>
         )
     })

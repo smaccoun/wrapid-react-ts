@@ -10,6 +10,12 @@
     width: 64px;
 }
 
+.icon {
+    position: relative;
+    left: 16px;
+    top: 16px;
+}
+
 .infoContainer {
     display: flex;
     flex-direction: column;

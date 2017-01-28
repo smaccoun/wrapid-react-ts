@@ -12,7 +12,11 @@ interface Props {
 const ExtraNotificationItem = (props: Props) => {
     return(
         <div className={s.container}>
-            <div className={s.iconContainer}>{props.icon}</div>
+            <div className={s.iconContainer}>
+                <div className={s.icon}>
+                    {props.icon}
+                </div>
+            </div>
             <div className={s.infoContainer}>
                 <span className={s.title}>{props.title}</span>
                 <span className={s.timeSpan}>{props.timeSpan.startTm} - {props.timeSpan.endTm}</span>

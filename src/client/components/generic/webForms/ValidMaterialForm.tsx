@@ -1,43 +1,71 @@
 import * as React from 'react'
 import {Field} from "./fields";
 import {observer} from 'mobx-react'
-import {observable, action, computed} from 'mobx'
+import {observable, action, computed, IObservableObject, IActionFactory} from 'mobx'
 const Validator = require('validatorjs')
 
 import TextField from 'material-ui/TextField';
 
-class ValidMaterialForm extends React.Component<{fields: Array<Field>}, any> {
+interface AdvanceSection {
+    onAdvance: (fieldData: any) => void,
+    SubmitComponent: React.ComponentClass<any>
+}
 
-    constructor(props) {
-        super(props);
-
-    }
-
+@observer
+class ValidMaterialForm extends React.Component<{fields: Array<Field>, advanceSection?: AdvanceSection}, any> {
 
     render(){
         const {fields} = this.props;
         return(
             <div>
                 {fields.map(field => {
+                    const inputHandler = new InputHandler(field);
+                    console.log(inputHandler);
+
                     return(
-                        <ValidField field={field}/>
+                        <ValidField key={field.label} inputHandler={inputHandler} fieldLabel={field.label}/>
                     )
                 })}
+                <div>
+                    {this.props.advanceSection}
+                </div>
             </div>
         )
     }
 }
 
+
 @observer
-class ValidField extends React.Component<{field: Field}, any>{
-    @observable curInput = '';
+class ValidField extends React.Component<{fieldLabel: string, inputHandler: InputHandler}, any> {
+    render(){
+        const {fieldLabel, inputHandler} = this.props;
+        return(
+            <TextField
+                id={fieldLabel}
+                floatingLabelText={fieldLabel}
+                onChange={inputHandler.setInput}
+                errorText={inputHandler.errorMessage}
+            />
+        )
+    }
+}
+
+
+class InputHandler {
+    constructor(field: Field) {
+        this.field = field;
+    }
+
+    field: Field;
+    @observable curInput: '';
 
     @computed get errorMessage(): string {
         if(!this.curInput){
             return '';
         }
-        const field = this.props.field;
+
         const curInput = this.curInput;
+        const field = this.field;
         console.log(field);
         console.log(curInput)
         const data = {[field.label]: curInput};
@@ -52,26 +80,13 @@ class ValidField extends React.Component<{field: Field}, any>{
         return ''
     }
 
-    @action onFieldInput = (e: any, field: Field) => {
-        this.curInput = e.target.value;
-        console.log(e.target.value);
-
-    }
-
-    render(){
-        const {field} = this.props;
-        return(
-            <TextField
-                key={field.label}
-                id={field.label}
-                floatingLabelText={field.label}
-                onChange={e => this.onFieldInput(e, field)}
-                errorText={this.errorMessage}
-            />
-        )
+    @action setInput = (e: any) => {
+            this.curInput = e.target.value;
     }
 }
 
-export default ValidMaterialForm;
+
+
+export {ValidMaterialForm, ValidField};
 
 

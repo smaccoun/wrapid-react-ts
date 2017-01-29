@@ -1,6 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import ValidMaterialForm from "../../../../generic/webForms/ValidMaterialForm";
+import {ValidMaterialForm} from "../../../../generic/webForms/ValidMaterialForm";
 import {Field} from "../../../../generic/webForms/fields";
 
 const s = require('./style.css')

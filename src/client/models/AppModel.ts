@@ -1,16 +1,71 @@
-import {observable} from 'mobx'
+import {observable, computed, action, autorun} from 'mobx'
 import ILoginModel from '../components/generic/login/Login'
 
 import Router from '../../router/router'
 
-export interface AppModel {
-  loginModel: ILoginModel | null,
-  dashboardModel: null
+export enum VIEW_NAMES {
+  LOGIN,
+  EXTRA_PORTAL,
+  PA_PORTAL
 }
 
-export function initAppModel(): AppModel {
-  return {
-    loginModel: null,
-    dashboardModel: null
-  }
+export enum USER_TYPE {
+  EXTRA,
+  PA
 }
+
+
+export class AppModel {
+
+  constructor() {
+    this.autoRoute();
+  }
+
+  autoRoute = () => {
+    autorun(() => {
+      switch(this.viewName){
+        case VIEW_NAMES.LOGIN:
+          Router.navigate('Login')
+        case VIEW_NAMES.EXTRA_PORTAL:
+          Router.navigate('/ExtraPortal');
+          break;
+        default:
+          Router.navigate('Login')
+      }
+    })
+  }
+
+  @observable loginCredentials: any;
+
+  @computed get isLoggedIn():boolean {
+    return !!this.loginCredentials
+  }
+
+  @computed get userType(): USER_TYPE | false {
+    if(!this.isLoggedIn){
+      return false;
+    }
+
+    return USER_TYPE.EXTRA
+  }
+
+  @computed get viewName(): VIEW_NAMES {
+    if(this.isLoggedIn){
+      switch(this.userType){
+        case USER_TYPE.EXTRA:
+          return VIEW_NAMES.EXTRA_PORTAL;
+        case USER_TYPE.PA:
+          return VIEW_NAMES.PA_PORTAL;
+        default:
+          VIEW_NAMES.LOGIN
+      }
+    }
+    else{
+      return VIEW_NAMES.LOGIN
+    }
+  }
+
+
+}
+
+export default AppModel;

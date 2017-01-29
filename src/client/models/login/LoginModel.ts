@@ -1,15 +1,10 @@
-
+import {observable, action} from 'mobx'
 
 export interface ServerCredentials {
 
 }
 
-export interface ILoginModel {
-  serverCredentials: ServerCredentials | null
-}
+export class LoginModel {
+  @observable usernameInput: string = '';
 
-export function initModel(): ILoginModel{
-  return {
-    serverCredentials: null
-  }
 }

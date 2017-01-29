@@ -1,28 +1,20 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import ValidMaterialForm from "../../../../generic/webForms/ValidMaterialForm";
+import {Field} from "../../../../generic/webForms/fields";
 
 const s = require('./style.css')
 
-import TextField from 'material-ui/TextField';
+
 
 interface Props {
-  fields: any
+  fields: Array<Field>
 }
 
 const ProfileWizardContent = (props: Props) => {
     return(
       <div className={s.container}>
-        {Object.keys(props.fields).map((fieldKey, key) => {
-          console.log(fieldKey)
-          const field=props.fields[fieldKey]
-          return(
-              <TextField
-                key={field.label}
-                id={field.label}
-                floatingLabelText={field.label}
-              />
-          )
-        })}
+        <ValidMaterialForm fields={props.fields}/>
       </div>
     )
 }

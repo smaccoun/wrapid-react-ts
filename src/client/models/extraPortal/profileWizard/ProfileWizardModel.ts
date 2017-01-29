@@ -1,13 +1,14 @@
 import {observable, computed, action, autorun} from 'mobx'
 
 import {fields, plugins} from '../profileFields/fields'
+import {Field} from "../../../components/generic/webForms/fields";
 
 export class ProfileWizardStep {
   title: string
   isComplete: () => boolean
-  fields: any
+  fields: Array<Field>
 
-  constructor(title: string, fields: any, isComplete?: () => boolean){
+  constructor(title: string, fields: Array<Field>, isComplete?: () => boolean){
     this.title = title;
     const defaultIsComplete = () => false;
     this.isComplete = isComplete || defaultIsComplete;
@@ -15,9 +16,8 @@ export class ProfileWizardStep {
   }
 };
 
-const nameFields = {fistName: fields.firstNameField, lastName: fields.lastNameField}
-const emailFields = {email: fields.emailField}
-const signatureField = {signature: fields.signature}
+const nameFields = [fields.firstNameField, fields.lastNameField, fields.emailField]
+const signatureField = [fields.signature]
 const firstStep = new ProfileWizardStep('Personal Info', nameFields)
 const secondStep = new ProfileWizardStep('Signature', signatureField)
 const wizardSteps: Array<ProfileWizardStep> = [firstStep, secondStep]

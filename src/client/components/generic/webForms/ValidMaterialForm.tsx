@@ -11,27 +11,53 @@ interface AdvanceSection {
     SubmitComponent: React.ComponentClass<any>
 }
 
+
 @observer
 class ValidMaterialForm extends React.Component<{fields: Array<Field>, advanceSection?: AdvanceSection}, any> {
 
+    allInputs = [];
+
     render(){
         const {fields} = this.props;
+        let validFields = [];
+        fields.forEach(field => {
+            const inputHandler = new InputHandler(field);
+            this.allInputs.push(inputHandler);
+            const validField = <ValidField key={field.label} inputHandler={inputHandler} fieldLabel={field.label}/>;
+            validFields.push(validField)
+        })
+
         return(
             <div>
-                {fields.map(field => {
-                    const inputHandler = new InputHandler(field);
-                    console.log(inputHandler);
-
+                {validFields.map(vf => {
                     return(
-                        <ValidField key={field.label} inputHandler={inputHandler} fieldLabel={field.label}/>
+                        <div>{vf}</div>
                     )
                 })}
                 <div>
                     {this.props.advanceSection}
                 </div>
+                <button
+                    style={{margin: '16px', border: '1px solid black'}}
+                    onClick={() => console.log(submit(this.allInputs))}>
+                    ++Submit++
+                </button>
             </div>
         )
     }
+}
+
+const submit = (allInputs: Array<InputHandler>) => {
+    let inputTotal = [];
+    for(let i in allInputs){
+       const ai = allInputs[i];
+       if(ai.errorMessage){
+           alert('Bad input. Fix now!')
+           return;
+       }
+       inputTotal.push(ai.curInput)
+    }
+    return inputTotal.join(',')
 }
 
 

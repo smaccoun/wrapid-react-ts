@@ -7,6 +7,7 @@ import ExtraNotifications from '../notifications/ExtraNotifications/ExtraNotific
 import MainSchedule from '../../schedule/MainSchedule/MainSchedule'
 import CrewInfoPanel from '../../dailyTasks/CrewInfoPanel/CrewInfoPanel'
 import LunchNotificationIcon from "../../../generic/icons/LunchNotificationIcon";
+import fadesUp from "../../../generic/animations/fade/fadeInUp";
 
 
 const sampleCrewInfoItems = [
@@ -25,19 +26,22 @@ const sampleNotificationItems = [
     {title: 'Do stuff', timeSpan: {startTm: '11:00', endTm: '1:00 PM'}}
 ]
 
-const DailyTasksMainPage = (props: Props) => {
-  return(
-    <div className={s.container}>
-      <div className={s.headerInfo}>
-        <span className={s.date}>Monday May 25, 2016</span>
-        <span className={s.title}>Welcome, Steve</span>
-        <span className={s.production}>AMC's The Walking Dead</span>
-      </div>
-      <ExtraNotifications notifications={sampleNotificationItems}/>
-      <MainSchedule />
-      <CrewInfoPanel crewInfoItems={sampleCrewInfoItems}/>
-    </div>
-  )
+@fadesUp
+class DailyTasksMainPage extends React.Component<any, any> {
+    render(){
+        return(
+            <div className={s.container}>
+                <div className={s.headerInfo}>
+                    <span className={s.date}>Monday May 25, 2016</span>
+                    <span className={s.title}>Welcome, Steve</span>
+                    <span className={s.production}>AMC's The Walking Dead</span>
+                </div>
+                <ExtraNotifications notifications={sampleNotificationItems}/>
+                <MainSchedule />
+                <CrewInfoPanel crewInfoItems={sampleCrewInfoItems}/>
+            </div>
+        )
+    }
 }
 
 const viewDailyTasks = (model : any) => {

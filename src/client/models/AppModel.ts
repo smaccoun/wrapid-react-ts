@@ -1,5 +1,4 @@
 import {observable, computed, action, autorun} from 'mobx'
-import ILoginModel from '../components/generic/login/Login'
 
 import Router from '../../router/router'
 

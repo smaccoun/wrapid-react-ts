@@ -68,7 +68,7 @@ class ValidMaterialForm extends React.Component<{allInputs: AllInputs}, any> {
                 {Object.keys(allInputs).map(fieldId => {
                     const inputHandler = allInputs[fieldId]
                     return(
-                        <ValidField fieldLabel={fieldId} inputHandler={inputHandler}/>
+                        <ValidField key={fieldId} fieldLabel={fieldId} inputHandler={inputHandler}/>
                     )
                 })}
             </div>

@@ -7,6 +7,7 @@ import {ProfileWizardModel} from './profileWizard/ProfileWizardModel'
 import viewAllFormStatus from '../../components/extras/forms/AllFormStatus/AllFormStatus'
 
 import viewDailyTasks from '../../components/extras/dailyTasks/DailyTasksMainPage/DailyTasksMainPage'
+import {fetchProfile} from '../../../server/api/queries/queries'
 
 const childModels = {
   profileWizard: (onSubmitProfile?: () => void) => new ProfileWizardModel(onSubmitProfile)
@@ -15,24 +16,22 @@ const childModels = {
 type ExtraProfile = any;
 
 
-
 export class ExtraPortalModel {
 
   constructor() {
-    console.log(Router);
     this.addRouterNodeListeners();
     this.autoViewSet();
-    console.log(this.profile)
 
-    // this.profile = observable({
-    //   data: {},
-    //   get isCompleted() {
-    //     console.log(this.data);
-    //     return !isEmpty(this.data)
-    //   }
-    // });
-    //
-    // console.log(this.profile);
+    fetchProfile('steveId')
+        .then(gqlProfile => {
+          console.log(gqlProfile)
+          this.setProfile(gqlProfile.data.allBaseProfiles[0]);
+          console.log(this.profile);
+        })
+        .catch(error => {
+          console.error(error)
+        })
+
   }
 
   @observable profile: ExtraProfile;

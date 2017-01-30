@@ -1,20 +1,21 @@
 import gql from 'graphql-tag'
+import gqlSDK from "../../connect/graphcoolConnect";
 
-const allBaseProfiles = gql`query a {
-  allBaseProfiles {
+
+const allBaseProfiles = gql`query allProfiles {
+  allBaseProfiles{
     id
     firstName
-    lastName
   }
 }`
 
-const gqlGetExtra = gql`query getExtra($emailId: String) {
-  ExtraUser(emailId: $emailId){
-    id
-  }
-}`
-
-export {
-  allBaseProfiles,
-  gqlGetExtra
+export const fetchProfile = (extraId: string, options?: any): Promise<any> => {
+  return gqlSDK.query({query: allBaseProfiles, variables: {extraId}})
 }
+
+
+
+
+
+
+

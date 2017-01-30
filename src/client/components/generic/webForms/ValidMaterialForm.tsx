@@ -7,8 +7,8 @@ const Validator = require('validatorjs')
 import TextField from 'material-ui/TextField';
 
 interface AdvanceSection {
-    onAdvance: (fieldData: any) => void,
-    SubmitComponent: React.ComponentClass<any>
+    SubmitComponent: React.ComponentClass<any> | React.StatelessComponent<any>,
+    onAdvance: (allInputs: Array<any>) => void
 }
 
 
@@ -27,6 +27,8 @@ class ValidMaterialForm extends React.Component<{fields: Array<Field>, advanceSe
             validFields.push(validField)
         })
 
+        const {SubmitComponent, onAdvance} = this.props.advanceSection
+
         return(
             <div>
                 {validFields.map(vf => {
@@ -34,30 +36,10 @@ class ValidMaterialForm extends React.Component<{fields: Array<Field>, advanceSe
                         <div>{vf}</div>
                     )
                 })}
-                <div>
-                    {this.props.advanceSection}
-                </div>
-                <button
-                    style={{margin: '16px', border: '1px solid black'}}
-                    onClick={() => console.log(submit(this.allInputs))}>
-                    ++Submit++
-                </button>
+                <SubmitComponent onClick={() => onAdvance(this.allInputs)}/>
             </div>
         )
     }
-}
-
-const submit = (allInputs: Array<InputHandler>) => {
-    let inputTotal = [];
-    for(let i in allInputs){
-       const ai = allInputs[i];
-       if(ai.errorMessage){
-           alert('Bad input. Fix now!')
-           return;
-       }
-       inputTotal.push(ai.curInput)
-    }
-    return inputTotal.join(',')
 }
 
 

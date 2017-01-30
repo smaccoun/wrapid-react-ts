@@ -7,7 +7,11 @@ import AvatarNail from '../../../images/photoNails/AvatarNail/AvatarNail'
 import ActivityBell from './ActivityBell/ActivityBell'
 import WrapidLogo from '../../../brand/wrapidLogo/WrapidLogo'
 
-class Navbar extends React.Component<{}, {}>{
+interface Props {
+    rightActionItems?: React.StatelessComponent<any>
+}
+
+export class Navbar extends React.Component<Props, {}>{
 
   public render() {
     return(
@@ -15,17 +19,25 @@ class Navbar extends React.Component<{}, {}>{
         <div className={s.brandLabel}>
           <WrapidLogo />
         </div>
-        <div className={s.rightActionItems}>
-          <ActivityBell />
-          <AvatarNail />
-          <HamburgerMenu />
+        <div className={s.rightActionItemContainer}>
+            {this.props.rightActionItems}
         </div>
       </div>
     )
   }
 }
 
-const HamburgerMenu = () => {
+export const DefaultRightActionItems: React.StatelessComponent<{}> = () => {
+    return(
+        <div>
+            <ActivityBell />
+            <AvatarNail />
+            <HamburgerMenu />
+        </div>
+    )
+}
+
+export const HamburgerMenu = () => {
   return(
     <div className={s.hamburgerMenu}>
       <span className={s.iconBar}></span>
@@ -34,5 +46,3 @@ const HamburgerMenu = () => {
     </div>
   )
 }
-
-export default Navbar

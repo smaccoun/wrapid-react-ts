@@ -14,11 +14,7 @@
   letter-spacing: 0;
 }
 
-.footer {
-  display: flex;
-  flex-direction: row-reverse;
-  margin: 16px 0px 8px 0px;
-}
+
 
 .advButton {
   margin: 4px 16px 4px 16px;

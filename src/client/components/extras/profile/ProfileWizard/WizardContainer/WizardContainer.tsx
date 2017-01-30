@@ -6,7 +6,6 @@ const s = require('./style.css')
 import {observer} from 'mobx-react'
 
 import ProfileWizardContent from '../Content/ProfileWizardContent'
-import FlatButton from 'material-ui/FlatButton';
 
 // const form: any = new ContentForm({ fields }, { plugins });
 
@@ -25,13 +24,6 @@ const WizardContainer = observer((props: Props) => {
     <div className={s.container}>
       <div className={s.header}>{currentStep.title}</div>
       <ProfileWizardContent fields={currentStep.fields}/>
-      <div className={s.footer}>
-        <FlatButton
-          style={{color: '#50E3C2'}}
-          label={advButtonMsg}
-          onClick={model.incrementStep}
-        />
-      </div>
     </div>
   )
 })

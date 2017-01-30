@@ -35,10 +35,15 @@ export class AppModel {
     })
   }
 
-  @observable loginCredentials: any;
+  @observable loginToken: any;
 
   @computed get isLoggedIn():boolean {
-    return !!this.loginCredentials
+    return !!this.loginToken
+  }
+
+  @action submitLogin = (userName: string, password: string) => {
+    this.loginToken = {userName, password};
+    console.log(this.loginToken)
   }
 
   @computed get userType(): USER_TYPE | false {

@@ -1,6 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import gql from 'graphql-tag'
 import {observer} from 'mobx-react'
 
 import Dashboard from '../../generic/layouts/dashboard/Dashboard/Dashboard'

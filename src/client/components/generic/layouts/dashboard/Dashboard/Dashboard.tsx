@@ -3,15 +3,18 @@ import * as ReactDOM from 'react-dom';
 
 const s = require('./style.css')
 
-import Navbar from '../Navbar/Navbar'
-import MainPage from '../MainPage/MainPage'
+import {Navbar, DefaultRightActionItems} from '../Navbar/Navbar'
 
-class Dashboard extends React.Component<{}, {}>{
+interface Props {
+    navbarRightItems?: React.StatelessComponent<any>
+}
+
+class Dashboard extends React.Component<Props, {}>{
 
   public render(){
     return(
       <div className={s.container}>
-        <Navbar />
+        <Navbar rightActionItems={this.props.navbarRightItems}/>
         <div className={s.mainPage}>
           {this.props.children}
         </div>

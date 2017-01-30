@@ -1,3 +1,4 @@
+import {observer} from "mobx-react";
 const styles = require('./index.scss')
 import * as React from 'react';
 
@@ -13,16 +14,18 @@ import {AppModel, VIEW_NAMES} from './client/models/AppModel'
 
 const appModel = new AppModel();
 
-export default class App extends React.Component<any, any> {
+@observer
+class App extends React.Component<any, any> {
 
     renderMainView = (): React.ReactElement<any> => {
+        const LoginView = <Login submitLogin={appModel.submitLogin} />
         switch(appModel.viewName){
             case VIEW_NAMES.LOGIN:
-                return <Login />
+                return LoginView
             case VIEW_NAMES.EXTRA_PORTAL:
                 return <ExtraPortal/>
             default:
-                return <Login/>
+                return LoginView
 
         }
     }
@@ -31,9 +34,11 @@ export default class App extends React.Component<any, any> {
     return (
       <div>
         <MuiThemeProvider>
-        {this.renderMainView()}
+            {this.renderMainView()}
         </MuiThemeProvider>
       </div>
     )
   }
 }
+
+export default App;

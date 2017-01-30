@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ValidMaterialForm} from "../../../../generic/webForms/ValidMaterialForm";
+import {ValidMaterialForm, ValidFormStateHandler} from "../../../../generic/webForms/ValidMaterialForm";
 import {Field} from "../../../../generic/webForms/fields";
 
 const s = require('./style.css')
@@ -13,9 +13,10 @@ interface Props {
 
 const ProfileWizardContent = (props: Props) => {
     const onAdvance = (allInputs: Array<any>) => console.log(allInputs);
+    const model = new ValidFormStateHandler(props.fields);
     return(
       <div className={s.container}>
-        <ValidMaterialForm fields={props.fields} advanceSection={{SubmitComponent: AdvComponent, onAdvance}}/>
+        <ValidMaterialForm allInputs={model.allInputs}/>
       </div>
     )
 }

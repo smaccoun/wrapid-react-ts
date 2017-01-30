@@ -11,32 +11,63 @@ interface AdvanceSection {
     onAdvance: (allInputs: Array<any>) => void
 }
 
+interface AllInputs {
+    [fieldId: string]: InputHandler
+}
 
-@observer
-class ValidMaterialForm extends React.Component<{fields: Array<Field>, advanceSection?: AdvanceSection}, any> {
+export class ValidFormStateHandler {
 
-    allInputs = [];
-
-    render(){
-        const {fields} = this.props;
-        let validFields = [];
+    constructor(fields: Array<Field>) {
+        console.log(fields);
         fields.forEach(field => {
-            const inputHandler = new InputHandler(field);
-            this.allInputs.push(inputHandler);
-            const validField = <ValidField key={field.label} inputHandler={inputHandler} fieldLabel={field.label}/>;
-            validFields.push(validField)
+            this.allInputs[field.label] = new InputHandler(field);
         })
 
-        const {SubmitComponent, onAdvance} = this.props.advanceSection
+        console.log(this.allInputs)
+    }
+
+    allInputs: AllInputs = {}
+
+    @computed get areAllInputsValid(): boolean {
+        if(!this.allInputs){
+            return false;
+        }
+        const allInputs = this.allInputs
+        const allInputFields = Object.keys(allInputs);
+        console.log(allInputFields)
+        for(let i in allInputFields){
+            const fieldId = allInputFields[i]
+            const input = allInputs[fieldId]
+            console.log(input)
+            if('errorMessage' in input){
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+const viewValidMaterialForm = (fields: Array<Field>) => {
+    const model = new ValidFormStateHandler(fields);
+    const view = <ValidMaterialForm allInputs={model.allInputs}/>
+    return {model, view}
+}
+
+@observer
+class ValidMaterialForm extends React.Component<{allInputs: AllInputs}, any> {
+
+    render(){
+        const {allInputs} = this.props;
 
         return(
             <div>
-                {validFields.map(vf => {
+                {Object.keys(allInputs).map(fieldId => {
+                    const inputHandler = allInputs[fieldId]
                     return(
-                        <div>{vf}</div>
+                        <ValidField fieldLabel={fieldId} inputHandler={inputHandler}/>
                     )
                 })}
-                <SubmitComponent onClick={() => onAdvance(this.allInputs)}/>
             </div>
         )
     }
@@ -74,11 +105,9 @@ class InputHandler {
 
         const curInput = this.curInput;
         const field = this.field;
-        console.log(field);
         console.log(curInput)
         const data = {[field.label]: curInput};
         const rules = {[field.label]: field.rules};
-        console.log(rules);
         const valid = new Validator(data, rules);
 
         if(valid.fails()){

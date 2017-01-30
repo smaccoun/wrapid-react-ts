@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {Field} from "./fields";
 import {observer} from 'mobx-react'
-import {observable, action, computed, IObservableObject, IActionFactory} from 'mobx'
+import {observable, action, computed, isObservable, IActionFactory} from 'mobx'
 const Validator = require('validatorjs')
 
 import TextField from 'material-ui/TextField';
@@ -32,6 +32,7 @@ export class ValidFormStateHandler {
         if(!this.allInputs){
             return false;
         }
+        console.log(this.allInputs['Password'].curInput)
         const allInputs = this.allInputs
         const allInputFields = Object.keys(allInputs);
         console.log(allInputFields)
@@ -39,7 +40,9 @@ export class ValidFormStateHandler {
             const fieldId = allInputFields[i]
             const input = allInputs[fieldId]
             console.log(input)
-            if('errorMessage' in input){
+            console.error('CUR INPUT IN ISALLVALID!', input.curInput);
+
+            if(input.errorMessage.length > 0){
                 return false;
             }
         }

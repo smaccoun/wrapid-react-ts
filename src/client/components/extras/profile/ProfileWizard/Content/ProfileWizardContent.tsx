@@ -5,33 +5,33 @@ import {Field} from "../../../../generic/webForms/fields";
 const s = require('./style.css')
 
 import FlatButton from 'material-ui/FlatButton';
+import {ProfileWizardModel} from "../../../../../models/extraPortal/profileWizard/ProfileWizardModel";
 
 
 interface Props {
-  fields: Array<Field>
+  model: ProfileWizardModel
 }
 
 const ProfileWizardContent = (props: Props) => {
-    const onAdvance = (allInputs: Array<any>) => console.log(allInputs);
-    const model = new ValidFormStateHandler(props.fields);
+
+    const model = props.model;
+    const currentStep = model.currentStep;
+    const formState = new ValidFormStateHandler(currentStep.fields);
+    console.log(currentStep)
+    const advButtonMsg = model.isLastStep ? 'Finish' : 'Next'
     return(
       <div className={s.container}>
-        <ValidMaterialForm allInputs={model.allInputs}/>
+        <ValidMaterialForm allInputs={formState.allInputs}/>
+          <div className={s.footer}>
+              <FlatButton
+                  style={{color: '#50E3C2'}}
+                  label={advButtonMsg}
+                  onClick={() => model.incrementStep()}
+              />
+          </div>
       </div>
     )
 }
 
-const AdvComponent: React.StatelessComponent<any> = (onClick) => {
-    return(
-        <div className={s.footer}>
-            <FlatButton
-                style={{color: '#50E3C2'}}
-                label={'Next'}
-                onClick={onClick}
-            />
-        </div>
-    )
-
-}
 
 export default ProfileWizardContent

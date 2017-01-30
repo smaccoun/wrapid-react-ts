@@ -30,7 +30,11 @@ class Login extends React.Component<{submitLogin: (userName: string, password: s
     return(
       <Dashboard>
          <ValidMaterialForm allInputs={formState.allInputs}/>
-          {formState.areAllInputsValid ? <button>Next</button> : <div>Enter stuff yo!</div>}
+         <RaisedButton
+             style={{color: '#50E3C2'}}
+             label={'Login'}
+             onClick={() => this.props.submitLogin('Steve', 'Blah')}
+         />
       </Dashboard>
     )
   }

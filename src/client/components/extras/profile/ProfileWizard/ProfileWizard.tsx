@@ -6,18 +6,17 @@ const s = require('./style.css')
 import {observer} from 'mobx-react'
 
 import WizardContainer from './WizardContainer/WizardContainer'
+import {ProfileWizardModel} from "../../../../models/extraPortal/profileWizard/ProfileWizardModel";
 
 
 interface Props {
-  model: any
+  model: ProfileWizardModel
 }
 
 const ProfileWizard = observer((props: Props) => {
 
   const model = props.model
-  const currentStep = model.currentStep;
-  console.log(currentStep)
-  const advButtonMsg = model.isLastStep ? 'Finish' : 'Next'
+
   return(
     <div>
       <div className={s.heading}>

@@ -34,7 +34,7 @@ class App extends React.Component<any, any> {
     return (
       <div>
         <MuiThemeProvider>
-            {this.renderMainView()}
+            <ExtraPortal />
         </MuiThemeProvider>
       </div>
     )

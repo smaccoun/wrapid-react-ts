@@ -6,7 +6,7 @@ const s = require('./style.css')
 import {Navbar, DefaultRightActionItems} from '../Navbar/Navbar'
 
 interface Props {
-    navbarRightItems?: React.StatelessComponent<any>
+    navbarRightItems?: React.ReactElement<any>
 }
 
 class Dashboard extends React.Component<Props, {}>{

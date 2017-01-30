@@ -15,8 +15,6 @@ interface Props {
 
 const ProfileWizard = observer((props: Props) => {
 
-  const model = props.model
-
   return(
     <div>
       <div className={s.heading}>

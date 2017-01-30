@@ -8,7 +8,7 @@ import ActivityBell from './ActivityBell/ActivityBell'
 import WrapidLogo from '../../../brand/wrapidLogo/WrapidLogo'
 
 interface Props {
-    rightActionItems?: React.StatelessComponent<any>
+    rightActionItems?: React.ReactElement<any>
 }
 
 export class Navbar extends React.Component<Props, {}>{
@@ -29,7 +29,7 @@ export class Navbar extends React.Component<Props, {}>{
 
 export const DefaultRightActionItems: React.StatelessComponent<{}> = () => {
     return(
-        <div>
+        <div className={s.rightActionItemContainer}>
             <ActivityBell />
             <AvatarNail />
             <HamburgerMenu />

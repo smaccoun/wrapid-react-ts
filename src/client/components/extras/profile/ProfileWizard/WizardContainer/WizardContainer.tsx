@@ -23,7 +23,6 @@ const WizardContainer = observer((props: Props) => {
   const advButtonMsg = model.isLastStep ? 'Finish' : 'Next'
   return(
     <div className={s.container}>
-      <div className={s.header}>{currentStep.title}</div>
       <ProfileWizardContent model={model}/>
     </div>
   )

@@ -1,12 +1,13 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 
 const s = require('./style.css')
 
 import PanelHeader from '../PanelHeader/PanelHeader'
 
-interface Props extends React.Props<any> {
-  headerItems: Array<String>
+interface Props {
+  headerItems: Array<String>,
+    children?: React.ReactChildren,
+    footer?: React.ReactElement<any>
 }
 
 const DefaultPanel = (props: Props) => {
@@ -16,6 +17,11 @@ const DefaultPanel = (props: Props) => {
       <div className={s.contentContainer}>
         {props.children}
       </div>
+        {props.footer &&
+            <div className={s.footer}>
+                {props.footer}
+            </div>
+        }
     </div>
   )
 }

@@ -1,0 +1,15 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px 0 #D2D6DF;
+}
+
+.contentContainer > * {
+  margin: 0px 8px 0px 8px;
+}
+
+.footer {
+  margin: 8px 0px 4px 0px;
+  border-top: 1px solid #EBF0F5;
+}

@@ -40,8 +40,8 @@ export class AppModel {
     return !!this.loginToken
   }
 
-  @action submitLogin = (userName: string, password: string) => {
-    this.loginToken = {userName, password};
+  @action submitLogin = (email: string, password: string) => {
+    this.loginToken = {email, password};
     console.log(this.loginToken)
   }
 

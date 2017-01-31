@@ -14,7 +14,6 @@ class ExtraPortal extends React.Component<{}, {}>{
     const navbarRightItems: React.ReactElement<any> = <DefaultRightActionItems/>
     return(
       <Dashboard navbarRightItems={navbarRightItems}>
-        <h1>Welcome extra! </h1>
         <MainView />
       </Dashboard>
     )

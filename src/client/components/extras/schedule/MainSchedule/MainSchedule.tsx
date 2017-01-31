@@ -1,9 +1,8 @@
 import * as React from 'react';
+import DefaultPanel from "../../../generic/panels/DefaultPanel/DefaultPanel";
+import PanelFooter from "../../../generic/panels/PanelFooter/PanelFooter";
 
 const s = require('./style.css')
-
-import DefaultPanel from '../../dailyTasks/panels/DefaultPanel/DefaultPanel'
-import PanelFooter from '../../dailyTasks/panels/PanelFooter/PanelFooter'
 
 
 const MainSchedule = () => {

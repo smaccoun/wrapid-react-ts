@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import DefaultPanel from "../../../generic/panels/DefaultPanel/DefaultPanel";
 
 const s = require('./style.css')
-
-import DefaultPanel from '../panels/DefaultPanel/DefaultPanel'
 
 interface CrewInfoItem {
   role: string,

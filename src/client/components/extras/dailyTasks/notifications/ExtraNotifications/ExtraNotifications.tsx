@@ -1,8 +1,9 @@
 import * as React from 'react'
 
-import DefaultPanel from '../../panels/DefaultPanel/DefaultPanel'
+
 import {ExtraNotificationItem, Props as ENProps} from '../ExtraNotifications/ExtraNotificationItem/ExtraNotificationItem'
 import CheckIcon from "../../../../generic/icons/CheckIcon";
+import DefaultPanel from "../../../../generic/panels/DefaultPanel/DefaultPanel";
 
 interface Props {
  notifications: Array<ENProps>

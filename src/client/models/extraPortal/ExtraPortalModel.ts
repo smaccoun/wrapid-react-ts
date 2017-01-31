@@ -22,7 +22,7 @@ export class ExtraPortalModel {
     this.addRouterNodeListeners();
     this.autoViewSet();
 
-    fetchProfile('steveId')
+    fetchProfile('ciykqvsynnqo60127o3illsce')
         .then(gqlProfile => {
           console.log(gqlProfile)
           this.setProfile(gqlProfile.data.allBaseProfiles[0]);

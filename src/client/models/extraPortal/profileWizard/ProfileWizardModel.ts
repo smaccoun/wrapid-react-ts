@@ -1,4 +1,4 @@
-import {observable, computed, action, autorun} from 'mobx'
+import {observable, computed, action, toJS} from 'mobx'
 import {findIndex} from 'ramda'
 
 import {ProfileModel, ProfileSectionModel} from "../../profiles/ProfileModel";
@@ -30,14 +30,16 @@ export class ProfileWizardModel {
     this.setProfileSteps(profile);
   }
 
-  @action setProfileSteps = (profile: ProfileModel): void => {
+
+  setProfileSteps = (profile: ProfileModel): void => {
     console.log(profile);
     this.wizardSteps = profile.sections.map(section => {
       console.log(section);
       return new ProfileWizardStep(section.title, section)
     })
 
-    console.log(this.wizardSteps)
+
+    console.log(toJS(this.wizardSteps))
   }
 
   @observable wizardSteps: Array<ProfileWizardStep>;
@@ -50,7 +52,7 @@ export class ProfileWizardModel {
     const isStepComplete = (s: ProfileWizardStep) => s.sectionModel.isComplete()
     const firstCompleteStep = findIndex(isStepComplete, this.wizardSteps);
     console.log(firstCompleteStep)
-    return firstCompleteStep || 0
+    return firstCompleteStep > 0 ? firstCompleteStep : 0
   }
 
   @computed get currentStep(): ProfileWizardStep {
@@ -58,6 +60,7 @@ export class ProfileWizardModel {
     if(!this.wizardSteps){
       return null;
     }
+    console.log('CURSTEPIDX!', this.currentStepIdx)
     return this.wizardSteps[this.currentStepIdx]
   }
 

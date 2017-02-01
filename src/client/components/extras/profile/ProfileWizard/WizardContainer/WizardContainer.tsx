@@ -18,9 +18,6 @@ interface Props {
 const WizardContainer = observer((props: Props) => {
 
   const model = props.model
-  const currentStep = model.currentStep;
-  console.log(currentStep)
-  const advButtonMsg = model.isLastStep ? 'Finish' : 'Next'
   return(
     <div className={s.container}>
       <ProfileWizardContent model={model}/>

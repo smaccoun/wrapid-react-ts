@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ValidMaterialForm, ValidFormStateHandler} from "../../../../generic/webForms/ValidMaterialForm";
+import {ValidMaterialForm} from "../../../../generic/webForms/ValidMaterialForm";
 import {Field} from "../../../../generic/webForms/fields";
 
 const s = require('./style.css')
@@ -7,6 +7,7 @@ const s = require('./style.css')
 import FlatButton from 'material-ui/FlatButton';
 import {ProfileWizardModel} from "../../../../../models/extraPortal/profileWizard/ProfileWizardModel";
 import DefaultPanel from "../../../../generic/panels/DefaultPanel/DefaultPanel";
+import {ValidFormModel} from "../../../../../models/webForm/ValidFormModel";
 
 
 interface Props {
@@ -17,7 +18,7 @@ const ProfileWizardContent = (props: Props) => {
 
     const model = props.model;
     const currentStep = model.currentStep;
-    const formState = new ValidFormStateHandler(currentStep.fields);
+    const formState = new ValidFormModel(currentStep.fields);
     console.log(currentStep)
     const advButtonMsg = model.isLastStep ? 'Finish' : 'Next'
     const headerItems = [currentStep.title]

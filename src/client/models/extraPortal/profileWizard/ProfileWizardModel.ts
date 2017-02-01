@@ -1,7 +1,7 @@
 import {observable, computed, action, autorun} from 'mobx'
 
-import {fields, plugins} from '../profileFields/fields'
-import {Field} from "../../../components/generic/webForms/fields";
+
+import {emailField, Field, firstNameField, lastNameField, signature} from "../../../components/generic/webForms/fields";
 
 export class ProfileWizardStep {
   title: string
@@ -16,8 +16,8 @@ export class ProfileWizardStep {
   }
 };
 
-const nameFields = [fields.firstNameField, fields.lastNameField, fields.emailField]
-const signatureField = [fields.signature]
+const nameFields = [firstNameField, lastNameField, emailField]
+const signatureField = [signature]
 const firstStep = new ProfileWizardStep('Personal Info', nameFields)
 const secondStep = new ProfileWizardStep('Signature', signatureField)
 const wizardSteps: Array<ProfileWizardStep> = [firstStep, secondStep]

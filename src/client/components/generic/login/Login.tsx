@@ -3,39 +3,26 @@ import {observer} from 'mobx-react'
 
 const s = require('./style.css');
 
-import {ValidFormStateHandler, ValidMaterialForm} from "../webForms/ValidMaterialForm";
-import {Field, fields} from "../webForms/fields";
 import Dashboard from "../layouts/dashboard/Dashboard/Dashboard";
 import RaisedButton from 'material-ui/FlatButton';
 import DefaultPanel from "../panels/DefaultPanel/DefaultPanel";
+import {LoginModel} from "../../../models/login/LoginModel";
+import {ValidMaterialForm} from "../webForms/ValidMaterialForm";
 
-const loginFields: Array<Field> = [fields.userNameField, fields.passwordField]
 
-console.log(ValidFormStateHandler)
-
-@observer
-class Login extends React.Component<{submitLogin: (userName: string, password: string) => void}, {}> {
+class Login extends React.Component<{loginModel: LoginModel}, {}> {
 
 
   public render() {
-      // const onAdvance = (allInputs: Array<any>) => {
-      //     console.log('All inputs', allInputs)
-      //     this.props.submitLogin('Steve', 'blahdawg')
-      // }
-      // const advanceSection = {
-      //     SubmitComponent: SubmitSection,
-      //     onAdvance
-      // }
+      const {loginModel} = this.props;
 
-      const formState = new ValidFormStateHandler(loginFields);
-      console.log(formState);
 
-      const footer = <SubmitSection onClick={() => this.props.submitLogin('Steve', 'Blah')} />
+    const footer = <SubmitSection onClick={() => loginModel.submitLogin()} />
 
     return(
       <Dashboard>
           <DefaultPanel headerItems={['Login']} footer={footer} >
-             <ValidMaterialForm allInputs={formState.allInputs}/>
+             <ValidMaterialForm allInputs={loginModel.loginForm.allInputs}/>
           </DefaultPanel>
       </Dashboard>
     )
@@ -50,10 +37,14 @@ const SubmitSection: React.StatelessComponent<SubmitProps> = (props: SubmitProps
     return(
         <RaisedButton
             style={{color: '#50E3C2'}}
-            label={"Submit"}
+            label={"Login"}
             onClick={props.onClick}
         />
     )
+}
+
+const viewLogin = (model: LoginModel) => {
+    return <Login loginModel={model} />
 }
 
 export default Login

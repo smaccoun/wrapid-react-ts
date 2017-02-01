@@ -42,7 +42,8 @@ export class AppModel {
 
   @action submitLogin = (email: string, password: string) => {
     this.loginToken = {email, password};
-    console.log(this.loginToken)
+    alert(email)
+    alert(password)
   }
 
   @computed get userType(): USER_TYPE | false {

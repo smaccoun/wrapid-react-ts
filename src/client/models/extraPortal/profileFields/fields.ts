@@ -84,13 +84,3 @@ const signature: Field = {
   bindings: 'MaterialTextField',
 }
 
-export const fields = {
-  userNameField,
-  emailField,
-  passwordField,
-  firstNameField,
-  lastNameField,
-  middleInitialField,
-  emailConfirm,
-  signature
-}

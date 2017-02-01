@@ -1,63 +1,13 @@
 import * as React from 'react'
 import {Field} from "./fields";
 import {observer} from 'mobx-react'
-import {observable, action, computed, isObservable, IActionFactory} from 'mobx'
-const Validator = require('validatorjs')
+import {observable, action, computed, isObservable, IActionFactory, extendObservable} from 'mobx'
 
 import TextField from 'material-ui/TextField';
+import {AllInputs, ValidFieldModel} from "../../../models/webForm/ValidFormModel";
 
-interface AdvanceSection {
-    SubmitComponent: React.ComponentClass<any> | React.StatelessComponent<any>,
-    onAdvance: (allInputs: Array<any>) => void
-}
 
-interface AllInputs {
-    [fieldId: string]: InputHandler
-}
 
-export class ValidFormStateHandler {
-
-    constructor(fields: Array<Field>) {
-        console.log(fields);
-        fields.forEach(field => {
-            this.allInputs[field.label] = new InputHandler(field);
-        })
-
-        console.log(this.allInputs)
-    }
-
-    allInputs: AllInputs = {}
-
-    @computed get areAllInputsValid(): boolean {
-        if(!this.allInputs){
-            return false;
-        }
-        console.log(this.allInputs['Password'].curInput)
-        const allInputs = this.allInputs
-        const allInputFields = Object.keys(allInputs);
-        console.log(allInputFields)
-        for(let i in allInputFields){
-            const fieldId = allInputFields[i]
-            const input = allInputs[fieldId]
-            console.log(input)
-            console.error('CUR INPUT IN ISALLVALID!', input.curInput);
-
-            if(input.errorMessage.length > 0){
-                return false;
-            }
-        }
-
-        return true;
-    }
-}
-
-const viewValidMaterialForm = (fields: Array<Field>) => {
-    const model = new ValidFormStateHandler(fields);
-    const view = <ValidMaterialForm allInputs={model.allInputs}/>
-    return {model, view}
-}
-
-@observer
 class ValidMaterialForm extends React.Component<{allInputs: AllInputs}, any> {
 
     render(){
@@ -78,7 +28,7 @@ class ValidMaterialForm extends React.Component<{allInputs: AllInputs}, any> {
 
 
 @observer
-class ValidField extends React.Component<{fieldLabel: string, inputHandler: InputHandler}, any> {
+class ValidField extends React.Component<{fieldLabel: string, inputHandler: ValidFieldModel}, any> {
     render(){
         const {fieldLabel, inputHandler} = this.props;
         return(
@@ -93,37 +43,7 @@ class ValidField extends React.Component<{fieldLabel: string, inputHandler: Inpu
 }
 
 
-class InputHandler {
-    constructor(field: Field) {
-        this.field = field;
-    }
 
-    field: Field;
-    @observable curInput: '';
-
-    @computed get errorMessage(): string {
-        if(!this.curInput){
-            return '';
-        }
-
-        const curInput = this.curInput;
-        const field = this.field;
-        console.log(curInput)
-        const data = {[field.label]: curInput};
-        const rules = {[field.label]: field.rules};
-        const valid = new Validator(data, rules);
-
-        if(valid.fails()){
-            return valid.errors.get(field.label)
-        }
-
-        return ''
-    }
-
-    @action setInput = (e: any) => {
-            this.curInput = e.target.value;
-    }
-}
 
 
 

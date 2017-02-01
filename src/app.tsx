@@ -11,6 +11,7 @@ import Dashboard from './client/components/generic/layouts/dashboard/Dashboard/D
 import ExtraPortal from './client/components/extras/portal/ExtraPortal'
 
 import {AppModel, VIEW_NAMES} from './client/models/AppModel'
+import {LoginModel} from "./client/models/login/LoginModel";
 
 const appModel = new AppModel();
 
@@ -18,7 +19,7 @@ const appModel = new AppModel();
 class App extends React.Component<any, any> {
 
     renderMainView = (): React.ReactElement<any> => {
-        const LoginView = <Login submitLogin={appModel.submitLogin} />
+        const LoginView = <Login loginModel={new LoginModel(appModel.submitLogin)} />
         switch(appModel.viewName){
             case VIEW_NAMES.LOGIN:
                 return LoginView

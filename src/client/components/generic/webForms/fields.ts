@@ -7,7 +7,7 @@ export interface Field {
     bindings?: string
 }
 
-const userNameField: Field = {
+export const userNameField: Field = {
     label: 'Username',
     value: 'SteveJobs',
     placeholder: 'Insert User Name',
@@ -16,7 +16,7 @@ const userNameField: Field = {
     // validate: [checkUser],
 }
 
-const passwordField: Field = {
+export const passwordField: Field = {
     label: 'Password',
     value: 'thinkdifferent',
     placeholder: 'Insert your Password',
@@ -24,7 +24,7 @@ const passwordField: Field = {
     bindings: 'MaterialTextField',
 }
 
-const emailField: Field = {
+export const emailField: Field = {
     label: 'Email',
     value: 's.jobs@apple.com',
     related: ['emailConfirm'],
@@ -33,7 +33,7 @@ const emailField: Field = {
     bindings: 'MaterialTextField',
 }
 
-const firstNameField: Field = {
+export const firstNameField: Field = {
     label: 'First Name',
     value: 'SteveJobs',
     placeholder: 'Insert First Name',
@@ -42,7 +42,7 @@ const firstNameField: Field = {
     // validate: [checkUser],
 }
 
-const lastNameField: Field = {
+export const lastNameField: Field = {
     label: 'Last Name',
     value: 'SteveJobs',
     placeholder: 'Insert Last Name',
@@ -51,7 +51,7 @@ const lastNameField: Field = {
     // validate: [checkUser],
 }
 
-const middleInitialField: Field = {
+export const middleInitialField: Field = {
     label: 'Middle Initial',
     value: 'SteveJobs',
     placeholder: 'Insert Middle Initial',
@@ -63,7 +63,7 @@ const middleInitialField: Field = {
 
 
 
-const emailConfirm: Field = {
+export const emailConfirm: Field = {
     label: 'Confirm Email',
     value: 's.jobs@apple.com',
     placeholder: 'Confirm your Email address',
@@ -72,7 +72,7 @@ const emailConfirm: Field = {
     bindings: 'MaterialTextField',
 }
 
-const signature: Field = {
+export const signature: Field = {
     label: 'Signature',
     value: 's.jobs@apple.com',
     placeholder: 'Type Digital Signature',
@@ -81,13 +81,3 @@ const signature: Field = {
     bindings: 'MaterialTextField',
 }
 
-export const fields = {
-    userNameField,
-    emailField,
-    passwordField,
-    firstNameField,
-    lastNameField,
-    middleInitialField,
-    emailConfirm,
-    signature
-}

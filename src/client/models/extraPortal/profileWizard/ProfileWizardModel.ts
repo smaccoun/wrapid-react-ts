@@ -71,14 +71,15 @@ export class ProfileWizardModel {
 
   @computed get isComplete(): boolean {
     console.log(this.wizardSteps)
-    for(let i in this.wizardSteps){
-      const step = this.wizardSteps[i];
-      if(!step.isComplete){
-        return false;
-      }
-    }
-
-    return true;
+    return false;
+    // for(let i in this.wizardSteps){
+    //   const step = this.wizardSteps[i];
+    //   if(!step.isComplete){
+    //     return false;
+    //   }
+    // }
+    //
+    // return true;
   }
 
   @action incrementStep = (): void => {

@@ -12,7 +12,15 @@ export class ProfileSectionModel {
   validForm: ValidFormModel
 
   @computed get isComplete(): boolean {
-    return this.validForm.areAllInputsValid()
+    const allInputsEntered = this.validForm.allInputsEntered;
+    console.error('ALL INPUTS ENTERED?', allInputsEntered)
+    if(!allInputsEntered){
+      return false;
+    }
+
+    const allValid = this.validForm.areAllInputsValid
+    console.error('ALL VALID?!', allValid)
+    return allValid;
   }
 
 
@@ -27,14 +35,20 @@ export class ProfileModel {
   @observable sections: Array<ProfileSectionModel>
 
   @computed get isComplete(): boolean {
-      for(let i in this.sections){
-        const section = this.sections[i]
-        if(!section.isComplete){
-          return false;
-        }
-      }
-
-      return true;
+    console.log(this.sections)
+    return false;
+    // if(!this.sections){
+    //   return false;
+    // }
+    //   for(let i in this.sections){
+    //     const section = this.sections[i]
+    //     console.log(section)
+    //     if(!section.isComplete){
+    //       return false;
+    //     }
+    //   }
+    //
+    //   return true;
   }
 
 

@@ -1,14 +1,19 @@
 import * as React from 'react';
-import DefaultPanel from "../../../../generic/panels/DefaultPanel/DefaultPanel";
 
 const s = require('./style.css')
 
-const MainSchedule = () => {
+interface SIProps {
+  title: string,
+  startTm: string
+}
+
+const ScheduleItem = (props: SIProps) => {
   return(
-    <DefaultPanel headerItems={['Schedule', 'Monday']}>
-      <div>Schedule Item!</div>
-    </DefaultPanel>
+    <div className={s.itemContainer}>
+      <span className={s.title}>{props.title}</span>
+      <span className={s.startTm}>{props.startTm}</span>
+    </div>
   )
 }
 
-export default MainSchedule;
+export default ScheduleItem;

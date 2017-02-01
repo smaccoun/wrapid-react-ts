@@ -1,6 +1,7 @@
 import * as React from 'react';
 import DefaultPanel from "../../../generic/panels/DefaultPanel/DefaultPanel";
 import PanelFooter from "../../../generic/panels/PanelFooter/PanelFooter";
+import ScheduleItem from "./ScheduleItem/ScheduleItem";
 
 const s = require('./style.css')
 
@@ -23,18 +24,5 @@ const MainSchedule = () => {
   )
 }
 
-interface SIProps {
-  title: string,
-  startTm: string
-}
-
-const ScheduleItem = (props: SIProps) => {
-  return(
-    <div className={s.itemContainer}>
-      <span className={s.title}>{props.title}</span>
-      <span className={s.startTm}>{props.startTm}</span>
-    </div>
-  )
-}
 
 export default MainSchedule;

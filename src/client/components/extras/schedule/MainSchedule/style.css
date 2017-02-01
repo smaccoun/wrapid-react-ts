@@ -36,6 +36,7 @@
   border-color: transparent;
   height: 48px;
   width: 114px;
+  margin: 8px;
 }
 
 .checkinButton > span {

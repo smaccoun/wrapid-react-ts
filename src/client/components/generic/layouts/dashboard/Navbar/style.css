@@ -1,12 +1,9 @@
 .container {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
   z-index: 1030;
   height: 56px;
   margin-bottom: 8px;
   display: flex;
+  width: 100vw;
   justify-content: space-between;
   align-items: center;
   background: #FFFFFF;

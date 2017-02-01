@@ -1,14 +1,27 @@
 .container {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  min-height: 100vh;
   background-color: #F8FAFF;
 }
 
 .mainPage {
-  position: fixed;
-  top: 64px;
-  left: 0px;
-  right: 0px;
-  padding: 8px;
+  width: 100vw;
   height: 100%;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
 
+}
+
+.mainPage > * {
+  margin-left: 8px;
+  margin-right: 8px;
 }

@@ -35,11 +35,13 @@ interface SubmitProps {
 
 const SubmitSection: React.StatelessComponent<SubmitProps> = (props: SubmitProps) => {
     return(
-        <RaisedButton
-            style={{color: '#50E3C2'}}
-            label={"Login"}
-            onClick={props.onClick}
-        />
+        <div className={s.footer}>
+            <RaisedButton
+                style={{color: '#50E3C2'}}
+                label={"Login"}
+                onClick={props.onClick}
+            />
+        </div>
     )
 }
 

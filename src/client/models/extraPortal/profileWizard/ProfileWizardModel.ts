@@ -6,12 +6,12 @@ import {ProfileModel, ProfileSectionModel} from "../../profiles/ProfileModel";
 export class ProfileWizardStep {
   title: string
   sectionModel: ProfileSectionModel
-  isComplete = false;
+  @observable isComplete = false;
 
-  setIsComplete = (isComplete: boolean): void => {
-    if(!this.sectionModel.isComplete()){
-      return;
-    }
+  @action setIsComplete = (isComplete: boolean): void => {
+    // if(!this.sectionModel.isComplete()){
+    //   return;
+    // }
 
     this.isComplete = isComplete
   }
@@ -49,7 +49,7 @@ export class ProfileWizardModel {
     if(!this.wizardSteps){
       return 0;
     }
-    const isStepComplete = (s: ProfileWizardStep) => s.sectionModel.isComplete()
+    const isStepComplete = (s: ProfileWizardStep) => s.sectionModel.isComplete
     const firstCompleteStep = findIndex(isStepComplete, this.wizardSteps);
     console.log(firstCompleteStep)
     return firstCompleteStep > 0 ? firstCompleteStep : 0
@@ -69,6 +69,18 @@ export class ProfileWizardModel {
     return this.currentStepIdx == this.wizardSteps.length - 1
   }
 
+  @computed get isComplete(): boolean {
+    console.log(this.wizardSteps)
+    for(let i in this.wizardSteps){
+      const step = this.wizardSteps[i];
+      if(!step.isComplete){
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   @action incrementStep = (): void => {
     console.log(this.isLastStep)
     if(this.isLastStep){
@@ -77,6 +89,7 @@ export class ProfileWizardModel {
     }
 
     this.currentStep.setIsComplete(true);
+    console.log(this.currentStep)
   }
 
   @action decrementStep = (): void => {

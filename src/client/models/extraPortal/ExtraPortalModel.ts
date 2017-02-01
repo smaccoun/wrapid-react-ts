@@ -1,4 +1,4 @@
-import {observable, computed, action, autorun, toJS, isObservable} from 'mobx'
+import {observable, computed, action, autorun, toJS, isObservable, extendObservable} from 'mobx'
 import Router from '../../../router/router'
 
 import viewProfileWizard from '../../components/extras/profile/ProfileWizard/ProfileWizard'
@@ -33,10 +33,12 @@ export class ExtraPortalModel {
     this.loadProfile();
     this.addRouterNodeListeners();
     this.autoViewSet();
+
   }
 
-  private loadProfile = () => {
+  @action loadProfile = () => {
     this.profile = new ExtraProfileModel();
+    console.log('TO JS!!!!', toJS(this.profile))
   }
 
   @observable profile: ExtraProfileModel;
@@ -52,13 +54,14 @@ export class ExtraPortalModel {
 
 
   @computed get hasCompletedWizard() {
-    console.log(this.wizardResults)
     return !!this.wizardResults
   }
 
   autoViewSet = (): void => {
     autorun(() => {
-      if(!this.profile || !this.profile.isComplete()) {
+      console.error('AUTO RUNNING!!!', this.profile)
+
+      if(!this.profile || !this.profile.isComplete) {
         console.log('Going to profile wizard')
         this.setView(VIEW_NAMES.profileWizard, true)
         return;
@@ -71,17 +74,22 @@ export class ExtraPortalModel {
     })
   }
 
+  @action setMainViewName = (mainViewName: string) => {
+    this.mainViewName = mainViewName;
+  }
+
   addRouterNodeListeners = (): void => {
     Router.addRouteListener(VIEW_NAMES.dailyTasks, (toState: any, fromState: any) => {
-      this.mainViewName = VIEW_NAMES.dailyTasks;
+      this.setMainViewName(VIEW_NAMES.dailyTasks)
+      console.error(this.mainViewName)
     });
 
     Router.addRouteListener(VIEW_NAMES.allFormStatus, (toState: any, fromState: any) => {
-      this.mainViewName = VIEW_NAMES.allFormStatus;
+      this.setMainViewName(VIEW_NAMES.allFormStatus);
     })
 
     Router.addRouteListener(VIEW_NAMES.profileWizard, (toState: any, fromState: any) => {
-      this.mainViewName = VIEW_NAMES.profileWizard;
+      this.setMainViewName(VIEW_NAMES.profileWizard);
     })
 
   }

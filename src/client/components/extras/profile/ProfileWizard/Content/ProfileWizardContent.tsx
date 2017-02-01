@@ -17,8 +17,9 @@ interface Props {
 const ProfileWizardContent = (props: Props) => {
 
     const model = props.model;
+    console.log(props.model)
     const currentStep = model.currentStep;
-    const formState = new ValidFormModel(currentStep.fields);
+    const formState = model.currentStep.sectionModel.validForm
     console.log(currentStep)
     const advButtonMsg = model.isLastStep ? 'Finish' : 'Next'
     const headerItems = [currentStep.title]

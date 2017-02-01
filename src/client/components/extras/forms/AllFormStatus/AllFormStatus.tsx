@@ -5,6 +5,7 @@ const s = require('./style.css')
 
 import {FormStatusIcon, IProps as IFormStatusProps} from '../../../generic/forms/FormStatusIcon/FormStatusIcon'
 import fadesUp from '../../../generic/animations/fade/fadeInUp'
+import ArrowForwardIcon from "material-ui/svg-icons/navigation/arrow-forward";
 const EFSFormImg: string = require('../../../../assets/images/forms/EFS.jpg')
 const PenceFormImg: string = require('../../../../assets/images/forms/Pence.jpg')
 const EmergeFormImg: string = require('../../../../assets/images/forms/Emerge.jpg')
@@ -24,8 +25,13 @@ class AllFormStatus extends React.Component<any, any> {
     render(){
         return(
             <div className={s.container}>
-                <span className={s.headerTitle}>Your completed forms</span>
-                <div onClick={this.props.model.navDailyTasks} className={s.dailyTaskNav}>Go to daily tasks - </div>
+                <div className={s.header}>
+                    <span className={s.headerTitle}>Your completed <br/> forms</span>
+                    <div onClick={this.props.model.navDailyTasks} className={s.dailyTaskNav}>
+                        <span style={{marginLeft: "4px"}}>Go to daily tasks</span>
+                        <ArrowForwardIcon style={{marginLeft: "2px"}} />
+                    </div>
+                </div>
                 <div className={s.formIconList}>
                     {forms.map((form, key) => {
                         return(

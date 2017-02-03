@@ -49,10 +49,16 @@ export class ProfileWizardModel {
     if(!this.wizardSteps){
       return 0;
     }
-    const isStepComplete = (s: ProfileWizardStep) => s.sectionModel.isComplete
+    console.error('WIZARD STEPS!!!!', toJS(this.wizardSteps))
+    const isStepComplete = (s: ProfileWizardStep) => {
+      console.log(s.isComplete)
+      return s.isComplete
+    }
     const firstCompleteStep = findIndex(isStepComplete, this.wizardSteps);
     console.log(firstCompleteStep)
-    return firstCompleteStep > 0 ? firstCompleteStep : 0
+    const nextStep = firstCompleteStep + 1;
+    console.log(nextStep)
+    return nextStep
   }
 
   @computed get currentStep(): ProfileWizardStep {

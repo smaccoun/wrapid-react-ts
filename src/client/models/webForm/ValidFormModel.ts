@@ -10,19 +10,23 @@ export class ValidFormModel {
 
     constructor(fields: Array<Field>) {
         console.log(fields);
+        this.setAllInputs(fields);
+
+    }
+
+    @action setAllInputs = (fields: Array<Field>) => {
         fields.forEach(field => {
             this.allInputs[field.label] = new ValidFieldModel(field);
         })
-
     }
 
     allInputs: AllInputs = {}
 
-    areAllInputsValid(): boolean {
+    @computed get allInputsEntered(): boolean {
         if(!this.allInputs){
             return false;
         }
-        console.log(this.allInputs['Password'].curInput)
+
         const allInputs = this.allInputs
         const allInputFields = Object.keys(allInputs);
         console.log(allInputFields)
@@ -30,7 +34,27 @@ export class ValidFormModel {
             const fieldId = allInputFields[i]
             const input = allInputs[fieldId]
             console.log(input)
-            console.error('CUR INPUT IN ISALLVALID!', input.curInput);
+
+            if(!input.curInput){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @computed get areAllInputsValid(): boolean {
+        if(!this.allInputs){
+            return false;
+        }
+
+        const allInputs = this.allInputs
+        const allInputFields = Object.keys(allInputs);
+        console.log(allInputFields)
+        for(let i in allInputFields){
+            const fieldId = allInputFields[i]
+            const input = allInputs[fieldId]
+            console.log(input)
 
             if(input.errorMessage.length > 0){
                 return false;

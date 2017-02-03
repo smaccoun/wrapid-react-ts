@@ -1,46 +1,91 @@
-import {observable, computed, action, autorun} from 'mobx'
+import {observable, computed, action, toJS} from 'mobx'
+import {findIndex} from 'ramda'
 
-
-import {emailField, Field, firstNameField, lastNameField, signature} from "../../../components/generic/webForms/fields";
+import {ProfileModel, ProfileSectionModel} from "../../profiles/ProfileModel";
 
 export class ProfileWizardStep {
   title: string
-  isComplete: () => boolean
-  fields: Array<Field>
+  sectionModel: ProfileSectionModel
+  @observable isComplete = false;
 
-  constructor(title: string, fields: Array<Field>, isComplete?: () => boolean){
+  @action setIsComplete = (isComplete: boolean): void => {
+    // if(!this.sectionModel.isComplete()){
+    //   return;
+    // }
+
+    this.isComplete = isComplete
+  }
+
+  constructor(title: string, profileSectionModel: ProfileSectionModel){
     this.title = title;
-    const defaultIsComplete = () => false;
-    this.isComplete = isComplete || defaultIsComplete;
-    this.fields = fields;
+    this.sectionModel = profileSectionModel
   }
 };
 
-const nameFields = [firstNameField, lastNameField, emailField]
-const signatureField = [signature]
-const firstStep = new ProfileWizardStep('Personal Info', nameFields)
-const secondStep = new ProfileWizardStep('Signature', signatureField)
-const wizardSteps: Array<ProfileWizardStep> = [firstStep, secondStep]
-
-type ExtraProfile = any;
 
 export class ProfileWizardModel {
 
-  @observable profile: ExtraProfile = null;
-  @observable currentStepIdx: number = 0;
+  constructor(profile: ProfileModel) {
+    console.log(profile);
+    this.setProfileSteps(profile);
+  }
+
+
+  setProfileSteps = (profile: ProfileModel): void => {
+    console.log(profile);
+    this.wizardSteps = profile.sections.map(section => {
+      console.log(section);
+      return new ProfileWizardStep(section.title, section)
+    })
+
+
+    console.log(toJS(this.wizardSteps))
+  }
+
+  @observable wizardSteps: Array<ProfileWizardStep>;
   onSubmitProfile: () => void;
 
+  @computed get currentStepIdx(): number {
+    if(!this.wizardSteps){
+      return 0;
+    }
+    console.error('WIZARD STEPS!!!!', toJS(this.wizardSteps))
+    const isStepComplete = (s: ProfileWizardStep) => {
+      console.log(s.isComplete)
+      return s.isComplete
+    }
+    const firstCompleteStep = findIndex(isStepComplete, this.wizardSteps);
+    console.log(firstCompleteStep)
+    const nextStep = firstCompleteStep + 1;
+    console.log(nextStep)
+    return nextStep
+  }
+
   @computed get currentStep(): ProfileWizardStep {
-    console.log(this.currentStepIdx)
     console.log(this.wizardSteps)
-    const currentStep = this.wizardSteps[this.currentStepIdx];
-    console.log(currentStep);
-    return currentStep;
+    if(!this.wizardSteps){
+      return null;
+    }
+    console.log('CURSTEPIDX!', this.currentStepIdx)
+    return this.wizardSteps[this.currentStepIdx]
   }
 
   @computed get isLastStep(): boolean {
     console.log(this.currentStepIdx)
     return this.currentStepIdx == this.wizardSteps.length - 1
+  }
+
+  @computed get isComplete(): boolean {
+    console.log(this.wizardSteps)
+    return false;
+    // for(let i in this.wizardSteps){
+    //   const step = this.wizardSteps[i];
+    //   if(!step.isComplete){
+    //     return false;
+    //   }
+    // }
+    //
+    // return true;
   }
 
   @action incrementStep = (): void => {
@@ -50,19 +95,13 @@ export class ProfileWizardModel {
       return;
     }
 
-    this.currentStepIdx = this.currentStepIdx + 1;
-    console.log(this.currentStepIdx)
+    this.currentStep.setIsComplete(true);
+    console.log(this.currentStep)
   }
 
   @action decrementStep = (): void => {
-    this.currentStepIdx  = this.currentStepIdx - 1;
+    this.currentStep.setIsComplete(false);
   }
 
-  get wizardSteps(): Array<ProfileWizardStep> {
-    return wizardSteps
-  }
 
-  constructor(onSubmitProfile?: () => void) {
-    this.onSubmitProfile = onSubmitProfile;
-  }
 }

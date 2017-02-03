@@ -1,91 +1,126 @@
-import {observable, computed, action, autorun, toJS, isObservable} from 'mobx'
+import {observable, computed, action, autorun, toJS, isObservable, extendObservable, when} from 'mobx'
 import Router from '../../../router/router'
 
-import viewProfileWizard from '../../components/extras/profile/ProfileWizard/ProfileWizard'
 import {ProfileWizardModel} from './profileWizard/ProfileWizardModel'
+import {ExtraProfileModel} from "./profileWizard/ExtraProfileModel";
+import {fromPromise, FULFILLED, IPromiseBasedObservable} from "mobx-utils";
 
-import viewAllFormStatus from '../../components/extras/forms/AllFormStatus/AllFormStatus'
-
-import viewDailyTasks from '../../components/extras/dailyTasks/DailyTasksMainPage/DailyTasksMainPage'
-import {fetchProfile} from '../../../server/api/queries/queries'
-
+const loadProfileWizardModel = () => {
+  const extraProfileModel = new ExtraProfileModel();
+  console.log(extraProfileModel)
+  const wizardModel = new ProfileWizardModel(extraProfileModel)
+  console.log(wizardModel)
+  return wizardModel;
+}
 const childModels = {
-  profileWizard: (onSubmitProfile?: () => void) => new ProfileWizardModel(onSubmitProfile)
+  extraProfileWizard: () => loadProfileWizardModel()
 }
 
-type ExtraProfile = any;
+const ExtraPortalRoutes = {
+  profileWizard: 'ExtraPortal.ProfileWizard',
+  dailyTasks: 'ExtraPortal.DailyTasks',
+  allFormStatus: 'ExtraPortal.AllFormStatus'
+
+}
+
+class ExtraInfo {
+  profile: ExtraProfileModel
+}
+
+const loadExtraInfo = (): Promise<ExtraInfo> => {
+  return new Promise((resolve, reject) => {
+    const profile = new ExtraProfileModel()
+    resolve({profile})
+  })
+}
+
+export enum VIEW_NAMES {
+  LOADING,
+  ERROR,
+  PROFILE_WIZARD,
+  DAILY_TASKS,
+  ALL_FORM_STATUS
+}
+
+type ExtraPortalModels = ProfileWizardModel
+
+interface ModelView {
+  viewName: VIEW_NAMES
+  model?: ExtraPortalModels
+}
 
 
 export class ExtraPortalModel {
 
   constructor() {
-    this.addRouterNodeListeners();
-    this.autoViewSet();
-
-    fetchProfile('ciykqvsynnqo60127o3illsce')
-        .then(gqlProfile => {
-          console.log(gqlProfile)
-          this.setProfile(gqlProfile.data.allBaseProfiles[0]);
-          console.log(this.profile);
-        })
-        .catch(error => {
-          console.error(error)
-        })
+    this.loadExtraInfo();
+    when(
+      () => this.extraInfo.state == "fulfilled",
+      () => {
+        this.profile = this.extraInfo.value.profile;
+        this.isProfileComplete = this.extraInfo.value.profile.isComplete;
+      }
+    )
+    this.addRouteListeners();
 
   }
 
-  @observable profile: ExtraProfile;
+  @observable curRoute: string = 'ExtraPortal.ProfileWizard';
+  profile: ExtraProfileModel;
+
+  @observable isProfileComplete: boolean
+
+
+  @computed get mainModelView(): ModelView {
+      switch(this.extraInfo.state){
+        case "pending": return {viewName: VIEW_NAMES.LOADING}
+        case "rejected": return {viewName: VIEW_NAMES.ERROR}
+        case FULFILLED: return this.getViewState();
+      }
+
+  }
+
+  getViewState = (): ModelView => {
+    if(!this.isProfileComplete){
+      const model = new ProfileWizardModel(this.profile)
+      return {viewName: VIEW_NAMES.PROFILE_WIZARD, model}
+    }
+    return {viewName: VIEW_NAMES.DAILY_TASKS};
+  }
+
+  @action loadExtraInfo = () => {
+    this.extraInfo = fromPromise(loadExtraInfo());
+  }
+  extraInfo: IPromiseBasedObservable<ExtraInfo>
+
   @observable wizardResults: any;
-  @observable mainViewName: string = 'ExtraPortal.DailyTasks';
 
-  @action setProfile = (profile: ExtraProfile): void => {
-    this.profile = profile;
-    console.log(this.profile);
-    console.log(isObservable(this.profile))
-  }
 
   @action onSubmitProfile = () => {
     this.wizardResults = {firstName: 'Steve'}
-    console.log(this);
-    this.profile = {firstName: 'Steve'}
-    console.log(this.profile);
   }
 
-  @computed get hasCompletedProfile() {
-    return !!this.profile
-  }
+
 
   @computed get hasCompletedWizard() {
-    console.log(this.wizardResults)
     return !!this.wizardResults
   }
 
-  autoViewSet = (): void => {
-    autorun(() => {
-      if(!this.hasCompletedProfile) {
-        console.log('Going to profile wizard')
-        this.setView('ExtraPortal.ProfileWizard', true)
-        return;
-      }
-
-      if(this.hasCompletedWizard){
-        this.setView('ExtraPortal.AllFormStatus', true)
-        return;
-      }
-    })
+  @action setCurRoute = (route: string): void => {
+    this.curRoute = route
   }
 
-  addRouterNodeListeners = (): void => {
-    Router.addRouteListener('ExtraPortal.DailyTasks', (toState: any, fromState: any) => {
-      this.mainViewName = 'ExtraPortal.DailyTasks';
+  addRouteListeners = (): void => {
+    Router.addRouteListener(ExtraPortalRoutes.dailyTasks, (toState: any, fromState: any) => {
+      this.setCurRoute(ExtraPortalRoutes.dailyTasks)
     });
 
-    Router.addRouteListener('ExtraPortal.AllFormStatus', (toState: any, fromState: any) => {
-      this.mainViewName = 'ExtraPortal.AllFormStatus';
+    Router.addRouteListener(ExtraPortalRoutes.allFormStatus, (toState: any, fromState: any) => {
+      this.setCurRoute(ExtraPortalRoutes.allFormStatus);
     })
 
-    Router.addRouteListener('ExtraPortal.ProfileWizard', (toState: any, fromState: any) => {
-      this.mainViewName = 'ExtraPortal.ProfileWizard';
+    Router.addRouteListener(ExtraPortalRoutes.profileWizard, (toState: any, fromState: any) => {
+      this.setCurRoute(ExtraPortalRoutes.profileWizard);
     })
 
   }
@@ -101,21 +136,6 @@ export class ExtraPortalModel {
 
   }
 
-  @computed get mainView(): any {
-    console.log(this.mainViewName);
-    switch(this.mainViewName){
-      case 'ExtraPortal.ProfileWizard':
-        const model = childModels.profileWizard(this.onSubmitProfile)
-        return viewProfileWizard(model);
-      case 'ExtraPortal.AllFormStatus':
-        const navDailyTasks = () => this.setView('ExtraPortal.DailyTasks', true)
-        const view = viewAllFormStatus({navDailyTasks})
-        console.log(view);
-        return view;
-      default:
-        return viewDailyTasks({})
-    }
-  }
 
 
 

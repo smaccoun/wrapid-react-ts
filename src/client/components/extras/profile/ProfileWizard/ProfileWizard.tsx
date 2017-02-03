@@ -25,14 +25,5 @@ const ProfileWizard = observer((props: Props) => {
   )
 })
 
-const viewProfileWizard = (model : any) => {
-  return class PP extends React.Component<{}, {}> {
-    render(){
-      return(
-        <ProfileWizard model={model} />
-      )
-    }
-  }
-}
 
-export default viewProfileWizard
+export default ProfileWizard

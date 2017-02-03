@@ -54,24 +54,36 @@ export class ExtraPortalModel {
 
   constructor() {
     this.loadExtraInfo();
+    when(
+      () => this.extraInfo.state == "fulfilled",
+      () => {
+        this.initialLoadComplete = true;
+      }
+    )
     this.addRouteListeners();
 
   }
 
   @observable curRoute: string = 'ExtraPortal.ProfileWizard';
+  @observable initialLoadComplete: boolean = false;
+
 
   @computed get mainModelView(): ModelView {
-    switch(this.extraInfo.state){
-      case "pending": return {viewName: VIEW_NAMES.LOADING}
-      case "rejected": return {viewName: VIEW_NAMES.ERROR}
-      case "fulfilled":
-        const extraInfo = this.extraInfo.value;
-        console.error('LOADED EXTRA DATA!', this.extraInfo.value)
-        return this.getViewState(this.curRoute, extraInfo);
+    if(this.initialLoadComplete){
+      const extraInfo = toJS(this.extraInfo.value);
+      return this.getViewState(extraInfo)
     }
+    else{
+      switch(this.extraInfo.state){
+        case "pending": return {viewName: VIEW_NAMES.LOADING}
+        case "rejected": return {viewName: VIEW_NAMES.ERROR}
+      }
+    }
+
+
   }
 
-  getViewState = (curRoute: string, extraInfo: ExtraInfo): ModelView => {
+  getViewState = (extraInfo: ExtraInfo): ModelView => {
     if(!extraInfo.profile.isComplete){
       const model = new ProfileWizardModel(extraInfo.profile)
       return {viewName: VIEW_NAMES.PROFILE_WIZARD, model}

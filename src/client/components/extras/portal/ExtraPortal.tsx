@@ -16,11 +16,13 @@ class ExtraPortal extends React.Component<{extraPortalModel: ExtraPortalModel}, 
   renderMainView = () => {
     const {extraPortalModel} = this.props;
     const mainModelView = extraPortalModel.mainModelView;
+    console.error('main model view!: ', mainModelView)
     switch(mainModelView.viewName){
       case VIEW_NAMES.LOADING:
         return <div>Loading...</div>
       case VIEW_NAMES.PROFILE_WIZARD:
         const profileWizardModel = mainModelView.model
+        console.error('SHOWING A PROFILE WIZARD!!!!')
         return  <ProfileWizard model={profileWizardModel}/>
       case VIEW_NAMES.ALL_FORM_STATUS:
         return viewAllFormStatus({})

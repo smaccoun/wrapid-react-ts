@@ -91,7 +91,7 @@ export class ProfileWizardModel {
   @action incrementStep = (): void => {
     console.log(this.isLastStep)
     if(this.isLastStep){
-      this.onSubmitProfile();
+      console.log(`YOU JUST SUBMITTED!`, this.wizardSteps.map(s => s.sectionModel.validForm))
       return;
     }
 

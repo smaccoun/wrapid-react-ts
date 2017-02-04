@@ -32,7 +32,7 @@ type MSG = 'NOTHING' | PROFILE_LOADED
 const defaultMessage: MSG = 'NOTHING'
 let curMessage = observable({
   msg: defaultMessage,
-  setMsg: action.bound(function(msg: MSG) {
+  setMsg: action((msg: MSG) => {
     this.msg = msg;
   })
 })

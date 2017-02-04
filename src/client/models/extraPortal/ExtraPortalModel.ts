@@ -3,7 +3,7 @@ import Router from '../../../router/router'
 
 import {ProfileWizardModel} from './profileWizard/ProfileWizardModel'
 import {ExtraProfileModel} from "./profileWizard/ExtraProfileModel";
-import {fromPromise, FULFILLED, IPromiseBasedObservable} from "mobx-utils";
+import {fromPromise, FULFILLED, IPromiseBasedObservable, PENDING, REJECTED} from "mobx-utils";
 
 const loadProfileWizardModel = () => {
   const extraProfileModel = new ExtraProfileModel();
@@ -54,39 +54,55 @@ export class ExtraPortalModel {
 
   constructor() {
     this.loadExtraInfo();
-    when(
-      () => this.extraInfo.state == "fulfilled",
-      () => {
-        this.profile = this.extraInfo.value.profile;
-        this.isProfileComplete = this.extraInfo.value.profile.isComplete;
-      }
-    )
+    this.setInitialState();
     this.addRouteListeners();
 
   }
 
-  @observable curRoute: string = 'ExtraPortal.ProfileWizard';
-  profile: ExtraProfileModel;
+  setInitialState = () => {
+    when(
+      () => this.extraInfo.state == "fulfilled",
+      () => {
 
-  @observable isProfileComplete: boolean
+        this.hasLoadedInitialData = true;
+        const model = new ProfileWizardModel(this.extraInfo.value.profile)
+        this.mainModelView = {viewName: VIEW_NAMES.PROFILE_WIZARD, model}
+        console.error('GOT YOU A PROFILE!!!!', this.profile)
 
-
-  @computed get mainModelView(): ModelView {
-      switch(this.extraInfo.state){
-        case "pending": return {viewName: VIEW_NAMES.LOADING}
-        case "rejected": return {viewName: VIEW_NAMES.ERROR}
-        case FULFILLED: return this.getViewState();
       }
-
+    )
+    when(
+      () => this.extraInfo.state != "fulfilled",
+      () => {
+        switch(this.extraInfo.state){
+          case PENDING:
+            this.mainModelView = {viewName: VIEW_NAMES.LOADING}
+            break;
+          case REJECTED:
+            this.mainModelView = {viewName: VIEW_NAMES.ERROR}
+            break;
+        }
+      }
+    )
   }
 
-  getViewState = (): ModelView => {
-    if(!this.isProfileComplete){
-      const model = new ProfileWizardModel(this.profile)
-      return {viewName: VIEW_NAMES.PROFILE_WIZARD, model}
+
+  @observable hasLoadedInitialData: boolean = false;
+  @observable curRoute: string = 'ExtraPortal.ProfileWizard';
+  @observable profile: ExtraProfileModel;
+
+  @computed get isProfileComplete(): boolean {
+    if(this.profile){
+      console.error('CHECKING FOR PROFILE COMPLETION!!!!', this.profile.isComplete)
+      return this.profile.isComplete
     }
-    return {viewName: VIEW_NAMES.DAILY_TASKS};
+
+    return false;
   }
+
+  @observable mainModelView: ModelView = {viewName: VIEW_NAMES.LOADING}
+
+
 
   @action loadExtraInfo = () => {
     this.extraInfo = fromPromise(loadExtraInfo());
